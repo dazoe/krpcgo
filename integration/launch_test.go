@@ -2,7 +2,6 @@ package integration
 
 import (
 	"context"
-	"fmt"
 	"math"
 	"testing"
 	"time"
@@ -24,22 +23,67 @@ func TestLaunch(t *testing.T) {
 
 	client := krpcgo.NewKRPCClient(krpcgo.KRPCClientConfig{})
 	require.NoError(t, client.Connect(ctx))
+	t.Logf("Connected to %s:%s", client.Host, client.RPCPort)
 
 	krpcService := krpc.New(client)
-	require.NoError(t, krpcService.SetPaused(false))
-	t.Cleanup(func() {
-		require.NoError(t, krpcService.SetPaused(true))
-	})
+	// TODO: SetPaused causes problems with current mod version if called while at space center :(
+	// require.NoError(t, krpcService.SetPaused(false))
+	// t.Cleanup(func() {
+	// 	require.NoError(t, krpcService.SetPaused(true))
+	// })
 
 	// Set stuff up
+	sc := spacecenter.New(client)
+	t.Log("Loading Space Center")
+	require.NoError(t, sc.LoadSpaceCenter())
+	t.Log("Requesting list of launchable vessels")
+	vv, err := sc.LaunchableVessels("VAB")
+	require.NoError(t, err)
+	require.Contains(t, vv, "Kerbal X", "Current game doesn't have Kerbal X avaiable")
+
+	// TODO: would be nice if kRPC had a way to get the whole roster
+	k, err := sc.GetKerbal("Tester Kerman")
+	require.NoError(t, err)
+	if k.ID() == 0 { //null :)
+		t.Log("Creating Tester Kerman")
+		require.NoError(t, sc.CreateKerbal("Tester Kerman", "Pilot", true))
+	}
+	_, err = sc.GetKerbal("Tester Kerman")
+	require.NoError(t, err)
+
+	t.Log("Loading Kerbal X on the Launch Pad")
+	require.NoError(t, sc.LaunchVessel("VAB", "Kerbal X", "LaunchPad", true, []string{"Tester Kerman"}, ""))
+
+	t.Log("Switching back to Space Center leaving vessel on pad")
+	require.NoError(t, sc.LoadSpaceCenter())
+
+	k, err = sc.GetKerbal("Tester2 Kerman")
+	require.NoError(t, err)
+	if k.ID() == 0 { //null :)
+		t.Log("Creating Tester2 Kerman")
+		require.NoError(t, sc.CreateKerbal("Tester2 Kerman", "Pilot", true))
+	}
+	_, err = sc.GetKerbal("Tester2 Kerman")
+	require.NoError(t, err)
+
+	t.Log("Loading Kerbal X on the Launch Pad again, expecting an error")
+	require.Error(t, sc.LaunchVessel("VAB", "Kerbal X", "LaunchPad", false, []string{"Tester2 Kerman"}, ""),
+		"Expected an error due to launch pad not being clear")
+
+	t.Log("Loading Kerbal X on the Launch Pad again again")
+	require.NoError(t, sc.LaunchVessel("VAB", "Kerbal X", "LaunchPad", true, []string{"Tester2 Kerman"}, ""))
+
 	gamescene, err := krpcService.CurrentGameScene()
 	require.NoError(t, err)
-	require.Equal(t, krpc.GameScene_Flight, gamescene, "Test should be run from the launch pad.")
-	sc := spacecenter.New(client)
+	require.Equal(t, krpc.GameScene_Flight, gamescene, "Expected to be Flight scene")
 
 	vessel, err := sc.ActiveVessel()
 	require.NoError(t, err)
+	vesselName, err := vessel.Name()
+	require.NoError(t, err)
+	t.Logf("Current vessel name: %s", vesselName)
 
+	t.Log("Setting up for launch")
 	rf, err := vessel.SurfaceReferenceFrame()
 	require.NoError(t, err)
 	flight, err := vessel.Flight(rf)
@@ -68,7 +112,7 @@ func TestLaunch(t *testing.T) {
 	autopilot, err := vessel.AutoPilot()
 	require.NoError(t, err)
 
-	// Launch
+	t.Log("Launch!")
 	_, err = control.ActivateNextStage()
 	require.NoError(t, err)
 	require.NoError(t, autopilot.Engage())
@@ -76,11 +120,13 @@ func TestLaunch(t *testing.T) {
 
 	// Autostaging
 	go func() {
+		t.Log("Autostaging gofunc starting")
+		defer t.Log("Autostaging finished")
 		stage, err := control.CurrentStage()
 		require.NoError(t, err)
 
 		for {
-			fmt.Printf("current stage is %v\n", stage)
+			t.Logf("current stage is %v\n", stage)
 			resources, err := vessel.ResourcesInDecoupleStage(stage-1, false)
 			require.NoError(t, err)
 			amountStream, err := resources.AmountStream("LiquidFuel")
@@ -117,6 +163,7 @@ func TestLaunch(t *testing.T) {
 
 	limitingThrottle := false
 
+	t.Logf("Waiting for appoapsis >= %0.2f", 0.9*targetAltitude)
 	for apoapsis < 0.9*targetAltitude {
 		select {
 		// Manage heading
@@ -145,8 +192,9 @@ func TestLaunch(t *testing.T) {
 			return
 		}
 	}
+	t.Logf("Appoapsis hit target: %0.2f", apoapsis)
 
-	// Fine tune apoapsis approach
+	t.Log("Fine tunning appoapsis approach")
 	require.NoError(t, control.SetThrottle(0.25))
 	for apoapsis < targetAltitude {
 		select {
@@ -157,7 +205,7 @@ func TestLaunch(t *testing.T) {
 	}
 	require.NoError(t, control.SetThrottle(0))
 
-	// Coast out of the atmosphere
+	t.Log("Coasting to edge of the atmosphere")
 	for apoapsis < 70500 {
 		select {
 		case apoapsis = <-apoapsisStream.C:
@@ -166,7 +214,7 @@ func TestLaunch(t *testing.T) {
 		}
 	}
 
-	// Plan circularization
+	t.Log("Calculating circularization maneuver")
 	body, err := orbit.Body()
 	require.NoError(t, err)
 	mu, err := body.GravitationalParameter()
@@ -186,7 +234,7 @@ func TestLaunch(t *testing.T) {
 	node, err := control.AddNode(ut+timeToApoapsis, float32(deltaV), 0, 0)
 	require.NoError(t, err)
 
-	// Calculate burn time
+	t.Log("Calculating burn time")
 	f, err := vessel.AvailableThrust()
 	require.NoError(t, err)
 	rawISP, err := vessel.SpecificImpulse()
@@ -198,7 +246,7 @@ func TestLaunch(t *testing.T) {
 	flowRate := float64(f) / isp
 	burnTime := (float64(m0) - m1) / flowRate
 
-	// Orient ship
+	t.Log("Orienting ship")
 	require.NoError(t, control.SetRCS(true))
 	nodeRF, err := node.ReferenceFrame()
 	require.NoError(t, err)
@@ -206,7 +254,7 @@ func TestLaunch(t *testing.T) {
 	require.NoError(t, autopilot.SetTargetDirection(types.NewVector3D(0, 1, 0).Tuple()))
 	require.NoError(t, autopilot.Wait())
 
-	// Wait until burn
+	t.Log("Waiting until burn")
 	ut, err = sc.UT()
 	require.NoError(t, err)
 	timeToApoapsis, err = orbit.TimeToApoapsis()
@@ -215,7 +263,7 @@ func TestLaunch(t *testing.T) {
 	leadTime := float64(5)
 	require.NoError(t, sc.WarpTo(burnUT-leadTime, 10, 1))
 
-	// Execute burn
+	t.Log("Executing burn")
 	timeToApoapsisStream, err := orbit.TimeToApoapsisStream()
 	require.NoError(t, err)
 	t.Cleanup(func() {
