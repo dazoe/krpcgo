@@ -2,7 +2,6 @@
 package encode
 
 import (
-	"fmt"
 	"math"
 	"reflect"
 
@@ -117,7 +116,6 @@ func Marshal(m interface{}) ([]byte, error) {
 		}
 		// Assume it's a Tuple
 	case reflect.Struct:
-		fmt.Println(mType.String())
 		var tuple types.Tuple
 		for i := 0; i < mType.NumField(); i++ {
 			fieldBytes, err := Marshal(value.Field(i).Interface())
