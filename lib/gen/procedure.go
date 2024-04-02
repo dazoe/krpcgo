@@ -155,6 +155,14 @@ func generateProcedureBody(serviceName string, procedure *types.Procedure) (func
 				jen.Id("vv").Dot("Client").Op("=").Id("s").Dot("Client"),
 			)
 		}
+		// Return type is an array of classes
+		if procedure.ReturnType.Code == types.Type_LIST && procedure.ReturnType.Types[0].Code == types.Type_CLASS {
+			funcBody = append(funcBody,
+				jen.For(jen.Id("_, v").Op(":=").Range().Id("vv")).Block(
+					jen.Id("v").Dot("Client").Op("=").Id("s").Dot("Client"),
+				),
+			)
+		}
 		funcBody = append(funcBody,
 			jen.Return(returnVar, jen.Nil()),
 		)
