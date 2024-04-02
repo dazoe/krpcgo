@@ -188,6 +188,9 @@ func (s *KerbalAlarmClock) AlarmsWithType(t AlarmType) ([]*Alarm, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -338,6 +341,9 @@ func (s *KerbalAlarmClock) Alarms() ([]*Alarm, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }

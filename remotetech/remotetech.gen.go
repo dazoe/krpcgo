@@ -1209,6 +1209,9 @@ func (s *Comms) Antennas() ([]*Antenna, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 

@@ -88,6 +88,9 @@ func (s *InfernalRobotics) ServoGroups(vessel *spacecenter.Vessel) ([]*ServoGrou
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -2373,6 +2376,9 @@ func (s *ServoGroup) Servos() ([]*Servo, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -2437,6 +2443,9 @@ func (s *ServoGroup) Parts() ([]*spacecenter.Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }

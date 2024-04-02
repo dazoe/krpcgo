@@ -3144,6 +3144,9 @@ func (s *SpaceCenter) Vessels() ([]*Vessel, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -3190,6 +3193,9 @@ func (s *SpaceCenter) LaunchSites() ([]*LaunchSite, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -5104,6 +5110,9 @@ func (s *AlarmManager) Alarms() ([]*Alarm, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -10112,6 +10121,9 @@ func (s *CelestialBody) Satellites() ([]*CelestialBody, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -12266,6 +12278,9 @@ func (s *Comms) ControlPath() ([]*CommLink, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -13706,6 +13721,9 @@ func (s *Contract) Parameters() ([]*ContractParameter, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -13836,6 +13854,9 @@ func (s *ContractManager) AllContracts() ([]*Contract, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -13900,6 +13921,9 @@ func (s *ContractManager) ActiveContracts() ([]*Contract, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -13966,6 +13990,9 @@ func (s *ContractManager) OfferedContracts() ([]*Contract, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -14031,6 +14058,9 @@ func (s *ContractManager) CompletedContracts() ([]*Contract, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -14095,6 +14125,9 @@ func (s *ContractManager) FailedContracts() ([]*Contract, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -14290,6 +14323,9 @@ func (s *ContractParameter) Children() ([]*ContractParameter, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -14881,6 +14917,9 @@ func (s *Control) ActivateNextStage() ([]*Vessel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -18847,6 +18886,9 @@ func (s *Control) Nodes() ([]*Node, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -31450,6 +31492,9 @@ func (s *Engine) Thrusters() ([]*Thruster, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -31781,6 +31826,9 @@ func (s *Engine) Propellants() ([]*Propellant, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -33662,6 +33710,9 @@ func (s *Experiment) Data() ([]*ScienceData, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -38993,6 +39044,9 @@ func (s *Part) Children() ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -40775,6 +40829,9 @@ func (s *Part) FuelLinesFrom() ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -40842,6 +40899,9 @@ func (s *Part) FuelLinesTo() ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -40907,6 +40967,9 @@ func (s *Part) Modules() ([]*Module, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -41229,6 +41292,9 @@ func (s *Part) Experiments() ([]*Experiment, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -42223,6 +42289,9 @@ func (s *Parts) WithName(name string) ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -42306,6 +42375,9 @@ func (s *Parts) WithTitle(title string) ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -42388,6 +42460,9 @@ func (s *Parts) WithTag(tag string) ([]*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -42473,6 +42548,9 @@ func (s *Parts) WithModule(moduleName string) ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -42557,6 +42635,9 @@ func (s *Parts) InStage(stage int32) ([]*Part, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -42639,6 +42720,9 @@ func (s *Parts) InDecoupleStage(stage int32) ([]*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -42724,6 +42808,9 @@ func (s *Parts) ModulesWithName(moduleName string) ([]*Module, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -42798,6 +42885,9 @@ func (s *Parts) All() ([]*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -42959,6 +43049,9 @@ func (s *Parts) Antennas() ([]*Antenna, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43023,6 +43116,9 @@ func (s *Parts) ControlSurfaces() ([]*ControlSurface, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43089,6 +43185,9 @@ func (s *Parts) CargoBays() ([]*CargoBay, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43153,6 +43252,9 @@ func (s *Parts) Decouplers() ([]*Decoupler, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43219,6 +43321,9 @@ func (s *Parts) DockingPorts() ([]*DockingPort, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43283,6 +43388,9 @@ func (s *Parts) Engines() ([]*Engine, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43349,6 +43457,9 @@ func (s *Parts) Experiments() ([]*Experiment, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43413,6 +43524,9 @@ func (s *Parts) Fairings() ([]*Fairing, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43479,6 +43593,9 @@ func (s *Parts) Intakes() ([]*Intake, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43543,6 +43660,9 @@ func (s *Parts) Legs() ([]*Leg, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43609,6 +43729,9 @@ func (s *Parts) LaunchClamps() ([]*LaunchClamp, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43673,6 +43796,9 @@ func (s *Parts) Lights() ([]*Light, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43739,6 +43865,9 @@ func (s *Parts) Parachutes() ([]*Parachute, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43803,6 +43932,9 @@ func (s *Parts) Radiators() ([]*Radiator, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43869,6 +44001,9 @@ func (s *Parts) RCS() ([]*RCS, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -43933,6 +44068,9 @@ func (s *Parts) ReactionWheels() ([]*ReactionWheel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -43999,6 +44137,9 @@ func (s *Parts) ResourceConverters() ([]*ResourceConverter, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -44063,6 +44204,9 @@ func (s *Parts) ResourceHarvesters() ([]*ResourceHarvester, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -44129,6 +44273,9 @@ func (s *Parts) Sensors() ([]*Sensor, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -44193,6 +44340,9 @@ func (s *Parts) SolarPanels() ([]*SolarPanel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -44259,6 +44409,9 @@ func (s *Parts) Wheels() ([]*Wheel, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -44323,6 +44476,9 @@ func (s *Parts) RoboticHinges() ([]*RoboticHinge, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -44389,6 +44545,9 @@ func (s *Parts) RoboticPistons() ([]*RoboticPiston, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -44453,6 +44612,9 @@ func (s *Parts) RoboticRotations() ([]*RoboticRotation, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -44519,6 +44681,9 @@ func (s *Parts) RoboticRotors() ([]*RoboticRotor, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -44583,6 +44748,9 @@ func (s *Parts) ResourceDrains() ([]*ResourceDrain, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -46569,6 +46737,9 @@ func (s *RCS) Thrusters() ([]*Thruster, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -48687,6 +48858,9 @@ func (s *ResourceDrain) AvailableResources() ([]*Resource, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -57774,6 +57948,9 @@ func (s *Resources) WithResource(name string) ([]*Resource, error) {
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
+	for _, v := range vv {
+		v.Client = s.Client
+	}
 	return vv, nil
 }
 
@@ -58220,6 +58397,9 @@ func (s *Resources) All() ([]*Resource, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -60034,6 +60214,9 @@ func (s *Vessel) Crew() ([]*CrewMember, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
@@ -63001,6 +63184,9 @@ func (s *WaypointManager) Waypoints() ([]*Waypoint, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
+	}
+	for _, v := range vv {
+		v.Client = s.Client
 	}
 	return vv, nil
 }
