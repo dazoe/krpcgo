@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"net"
+	"os"
 	"sync"
 
 	"github.com/atburke/krpc-go/types"
@@ -37,17 +38,26 @@ type KRPCClientConfig struct {
 
 // SetDefaults sets the config defaults.
 func (cfg *KRPCClientConfig) SetDefaults() {
+	var ok bool
 	if cfg.Host == "" {
-		cfg.Host = "localhost"
+		if cfg.Host, ok = os.LookupEnv("KRPC_HOST"); !ok {
+			cfg.Host = "localhost"
+		}
 	}
 	if cfg.RPCPort == "" {
-		cfg.RPCPort = "50000"
+		if cfg.RPCPort, ok = os.LookupEnv("KRPC_PORT"); !ok {
+			cfg.RPCPort = "50000"
+		}
 	}
 	if cfg.StreamPort == "" {
-		cfg.StreamPort = "50001"
+		if cfg.StreamPort, ok = os.LookupEnv("KRPC_STREAM_PORT"); !ok {
+			cfg.StreamPort = "50001"
+		}
 	}
 	if cfg.ClientName == "" {
-		cfg.ClientName = "krpc-go"
+		if cfg.ClientName, ok = os.LookupEnv("KRPC_CLIENTNAME"); !ok {
+			cfg.ClientName = "krpc-go"
+		}
 	}
 }
 
