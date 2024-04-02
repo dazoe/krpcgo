@@ -1,6 +1,6 @@
 // Package lidar provides methods to invoke procedures in the LiDAR service.
 //
-// From service docs: laserDist Service
+// From service docs: laserDist service.
 package lidar
 
 import (
@@ -27,7 +27,7 @@ func NewLaser(id uint64, client *krpcgo.KRPCClient) *Laser {
 	return c
 }
 
-// LiDAR - laserDist Service
+// LiDAR - laserDist service.
 type LiDAR struct {
 	Client *krpcgo.KRPCClient
 }
@@ -37,7 +37,7 @@ func New(client *krpcgo.KRPCClient) *LiDAR {
 	return &LiDAR{Client: client}
 }
 
-// Laser - get a LaserDist part
+// Laser - get a LaserDist part.
 //
 // Allowed game scenes: any.
 func (s *LiDAR) Laser(part *spacecenter.Part) (*Laser, error) {
@@ -68,7 +68,7 @@ func (s *LiDAR) Laser(part *spacecenter.Part) (*Laser, error) {
 	return &vv, nil
 }
 
-// Available - check if the LaserDist API is avaiable
+// Available - check if the LaserDist API is available.
 //
 // Allowed game scenes: any.
 func (s *LiDAR) Available() (bool, error) {
@@ -89,7 +89,7 @@ func (s *LiDAR) Available() (bool, error) {
 	return vv, nil
 }
 
-// AvailableStream - check if the LaserDist API is avaiable
+// AvailableStream - check if the LaserDist API is available.
 //
 // Allowed game scenes: any.
 func (s *LiDAR) AvailableStream() (*krpcgo.Stream[bool], error) {
@@ -146,7 +146,7 @@ func (s *Laser) Part() (*spacecenter.Part, error) {
 	return &vv, nil
 }
 
-// Cloud - get the pointcloud.
+// Cloud - get the point cloud from the LiDAR. Returns an empty list on failure.
 //
 // Allowed game scenes: any.
 func (s *Laser) Cloud() ([]float64, error) {
@@ -176,7 +176,8 @@ func (s *Laser) Cloud() ([]float64, error) {
 	return vv, nil
 }
 
-// CloudStream - get the pointcloud.
+// CloudStream - get the point cloud from the LiDAR. Returns an empty list on
+// failure.
 //
 // Allowed game scenes: any.
 func (s *Laser) CloudStream() (*krpcgo.Stream[[]float64], error) {

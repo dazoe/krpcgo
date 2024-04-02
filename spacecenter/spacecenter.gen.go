@@ -165,6 +165,26 @@ func (v *ControlState) SetValue(val int32) {
 }
 
 /*
+CrewMemberGender - a crew member's gender. See <see
+cref="M:SpaceCenter.CrewMember.Gender" />.
+*/
+type CrewMemberGender int32
+
+const (
+	// Male.
+	CrewMemberGender_Male CrewMemberGender = 0
+	// Female.
+	CrewMemberGender_Female CrewMemberGender = 1
+)
+
+func (v CrewMemberGender) Value() int32 {
+	return int32(v)
+}
+func (v *CrewMemberGender) SetValue(val int32) {
+	*v = CrewMemberGender(val)
+}
+
+/*
 CrewMemberType - the type of a crew member. See <see
 cref="M:SpaceCenter.CrewMember.Type" />.
 */
@@ -186,6 +206,28 @@ func (v CrewMemberType) Value() int32 {
 }
 func (v *CrewMemberType) SetValue(val int32) {
 	*v = CrewMemberType(val)
+}
+
+/*
+EditorFacility - editor facility. See <see
+cref="M:SpaceCenter.LaunchSite.EditorFacility" />.
+*/
+type EditorFacility int32
+
+const (
+	// Vehicle Assembly Building.
+	EditorFacility_VAB EditorFacility = 1
+	// Space Plane Hanger.
+	EditorFacility_SPH EditorFacility = 2
+	// None.
+	EditorFacility_None EditorFacility = 0
+)
+
+func (v EditorFacility) Value() int32 {
+	return int32(v)
+}
+func (v *EditorFacility) SetValue(val int32) {
+	*v = EditorFacility(val)
 }
 
 // GameMode - the game mode. Returned by <see cref="T:SpaceCenter.GameMode" />
@@ -218,6 +260,56 @@ func (v *GameMode) SetValue(val int32) {
 }
 
 /*
+MapFilterType - the set of things that are visible in map mode. These may be
+combined with bitwise logic.
+*/
+type MapFilterType int32
+
+const (
+	// Everything.
+	MapFilterType_All MapFilterType = -1
+	// Nothing.
+	MapFilterType_None MapFilterType = 0
+	// Debris.
+	MapFilterType_Debris MapFilterType = 1
+	// Unknown.
+	MapFilterType_Unknown MapFilterType = 2
+	// SpaceObjects.
+	MapFilterType_SpaceObjects MapFilterType = 4
+	// Probes.
+	MapFilterType_Probes MapFilterType = 8
+	// Rovers.
+	MapFilterType_Rovers MapFilterType = 16
+	// Landers.
+	MapFilterType_Landers MapFilterType = 32
+	// Ships.
+	MapFilterType_Ships MapFilterType = 64
+	// Stations.
+	MapFilterType_Stations MapFilterType = 128
+	// Bases.
+	MapFilterType_Bases MapFilterType = 256
+	// EVAs.
+	MapFilterType_EVAs MapFilterType = 512
+	// Flags.
+	MapFilterType_Flags MapFilterType = 1024
+	// Planes.
+	MapFilterType_Plane MapFilterType = 2048
+	// Relays.
+	MapFilterType_Relay MapFilterType = 4096
+	// Launch Sites.
+	MapFilterType_Site MapFilterType = 8192
+	// Deployed Science Controllers.
+	MapFilterType_DeployedScienceController MapFilterType = 16384
+)
+
+func (v MapFilterType) Value() int32 {
+	return int32(v)
+}
+func (v *MapFilterType) SetValue(val int32) {
+	*v = MapFilterType(val)
+}
+
+/*
 AntennaState - the state of an antenna. See <see
 cref="M:SpaceCenter.Antenna.State" />.
 */
@@ -244,33 +336,33 @@ func (v *AntennaState) SetValue(val int32) {
 }
 
 /*
-AutostrutState - the state of a Autostrut. <see
-cref="T:SpaceCenter.RadiatorState" />
+AutoStrutMode - the state of an auto-strut. <see
+cref="M:SpaceCenter.Part.AutoStrutMode" />
 */
-type AutostrutState int32
+type AutoStrutMode int32
 
 const (
 	// Off
-	AutostrutState_Off AutostrutState = 0
+	AutoStrutMode_Off AutoStrutMode = 0
 	// Root
-	AutostrutState_Root AutostrutState = 1
+	AutoStrutMode_Root AutoStrutMode = 1
 	// Heaviest
-	AutostrutState_Heaviest AutostrutState = 2
+	AutoStrutMode_Heaviest AutoStrutMode = 2
 	// Grandparent
-	AutostrutState_Grandparent AutostrutState = 3
+	AutoStrutMode_Grandparent AutoStrutMode = 3
 	// ForceRoot
-	AutostrutState_ForceRoot AutostrutState = 4
+	AutoStrutMode_ForceRoot AutoStrutMode = 4
 	// ForceHeaviest
-	AutostrutState_ForceHeaviest AutostrutState = 5
+	AutoStrutMode_ForceHeaviest AutoStrutMode = 5
 	// ForceGrandparent
-	AutostrutState_ForceGrandparent AutostrutState = 6
+	AutoStrutMode_ForceGrandparent AutoStrutMode = 6
 )
 
-func (v AutostrutState) Value() int32 {
+func (v AutoStrutMode) Value() int32 {
 	return int32(v)
 }
-func (v *AutostrutState) SetValue(val int32) {
-	*v = AutostrutState(val)
+func (v *AutoStrutMode) SetValue(val int32) {
+	*v = AutoStrutMode(val)
 }
 
 /*
@@ -327,6 +419,26 @@ func (v DockingPortState) Value() int32 {
 }
 func (v *DockingPortState) SetValue(val int32) {
 	*v = DockingPortState(val)
+}
+
+/*
+DrainMode - resource drain mode. See <see
+cref="M:SpaceCenter.ResourceDrain.DrainMode" />.
+*/
+type DrainMode int32
+
+const (
+	// Drains from the parent part.
+	DrainMode_Part DrainMode = 0
+	// Drains from all available parts.
+	DrainMode_Vessel DrainMode = 1
+)
+
+func (v DrainMode) Value() int32 {
+	return int32(v)
+}
+func (v *DrainMode) SetValue(val int32) {
+	*v = DrainMode(val)
 }
 
 /*
@@ -390,18 +502,15 @@ type ParachuteState int32
 const (
 	// The parachute is safely tucked away inside its housing.
 	ParachuteState_Stowed ParachuteState = 0
-	// The parachute is armed for deployment. (RealChutes only)
+	// The parachute is armed for deployment.
 	ParachuteState_Armed ParachuteState = 1
-	// The parachute is still stowed, but ready to semi-deploy. (Stock parachutes
-	// only)
-	ParachuteState_Active ParachuteState = 2
 	// The parachute has been deployed and is providing some drag, but is not fully
 	// deployed yet. (Stock parachutes only)
-	ParachuteState_SemiDeployed ParachuteState = 3
+	ParachuteState_SemiDeployed ParachuteState = 2
 	// The parachute is fully deployed.
-	ParachuteState_Deployed ParachuteState = 4
+	ParachuteState_Deployed ParachuteState = 3
 	// The parachute has been cut.
-	ParachuteState_Cut ParachuteState = 5
+	ParachuteState_Cut ParachuteState = 4
 )
 
 func (v ParachuteState) Value() int32 {
@@ -413,7 +522,7 @@ func (v *ParachuteState) SetValue(val int32) {
 
 /*
 RadiatorState - the state of a radiator. <see
-cref="T:SpaceCenter.RadiatorState" />
+cref="M:SpaceCenter.Radiator.State" />
 */
 type RadiatorState int32
 
@@ -426,7 +535,7 @@ const (
 	RadiatorState_Extending RadiatorState = 2
 	// Radiator is being retracted.
 	RadiatorState_Retracting RadiatorState = 3
-	// Radiator is being broken.
+	// Radiator is broken.
 	RadiatorState_Broken RadiatorState = 4
 )
 
@@ -465,26 +574,6 @@ func (v ResourceConverterState) Value() int32 {
 }
 func (v *ResourceConverterState) SetValue(val int32) {
 	*v = ResourceConverterState(val)
-}
-
-/*
-DrainModes - possible modes for resource draining.  part mode drains only
-from the parent part. vessel mode drains from all available tanks.
-*/
-type DrainModes int32
-
-const (
-	// Part
-	DrainModes_part DrainModes = 0
-	// Vessel
-	DrainModes_vessel DrainModes = 1
-)
-
-func (v DrainModes) Value() int32 {
-	return int32(v)
-}
-func (v *DrainModes) SetValue(val int32) {
-	*v = DrainModes(val)
 }
 
 /*
@@ -592,6 +681,30 @@ func (v *ResourceFlowMode) SetValue(val int32) {
 }
 
 /*
+RosterStatus - a crew member's roster status. See <see
+cref="M:SpaceCenter.CrewMember.RosterStatus" />.
+*/
+type RosterStatus int32
+
+const (
+	// Available.
+	RosterStatus_Available RosterStatus = 0
+	// Assigned.
+	RosterStatus_Assigned RosterStatus = 1
+	// Dead.
+	RosterStatus_Dead RosterStatus = 2
+	// Missing.
+	RosterStatus_Missing RosterStatus = 3
+)
+
+func (v RosterStatus) Value() int32 {
+	return int32(v)
+}
+func (v *RosterStatus) SetValue(val int32) {
+	*v = RosterStatus(val)
+}
+
+/*
 SASMode - the behavior of the SAS auto-pilot. See <see
 cref="M:SpaceCenter.AutoPilot.SASMode" />.
 */
@@ -647,6 +760,30 @@ func (v SpeedMode) Value() int32 {
 }
 func (v *SpeedMode) SetValue(val int32) {
 	*v = SpeedMode(val)
+}
+
+/*
+SuitType - a crew member's suit type. See <see
+cref="M:SpaceCenter.CrewMember.SuitType" />.
+*/
+type SuitType int32
+
+const (
+	// Default.
+	SuitType_Default SuitType = 0
+	// Vintage.
+	SuitType_Vintage SuitType = 1
+	// Future.
+	SuitType_Future SuitType = 2
+	// Slim.
+	SuitType_Slim SuitType = 3
+)
+
+func (v SuitType) Value() int32 {
+	return int32(v)
+}
+func (v *SuitType) SetValue(val int32) {
+	*v = SuitType(val)
 }
 
 /*
@@ -706,6 +843,22 @@ const (
 	VesselType_Ship VesselType = 7
 	// Station.
 	VesselType_Station VesselType = 8
+	// SpaceObject.
+	VesselType_SpaceObject VesselType = 9
+	// Unknown.
+	VesselType_Unknown VesselType = 10
+	// EVA.
+	VesselType_EVA VesselType = 11
+	// Flag.
+	VesselType_Flag VesselType = 12
+	// DeployedScienceController.
+	VesselType_DeployedScienceController VesselType = 13
+	// DeploedSciencePart.
+	VesselType_DeployedSciencePart VesselType = 14
+	// DroppedPart.
+	VesselType_DroppedPart VesselType = 15
+	// DeployedGroundPart.
+	VesselType_DeployedGroundPart VesselType = 16
 )
 
 func (v VesselType) Value() int32 {
@@ -737,8 +890,8 @@ func (v *WarpMode) SetValue(val int32) {
 	*v = WarpMode(val)
 }
 
-// Alarm - an Alarm. Can be accessed using <see cref="M:SpaceCenter.AlarmClock"
-// />.
+// Alarm - an alarm. Can be accessed using <see
+// cref="M:SpaceCenter.AlarmManager" />.
 type Alarm struct {
 	service.BaseClass
 }
@@ -750,15 +903,15 @@ func NewAlarm(id uint64, client *krpcgo.KRPCClient) *Alarm {
 	return c
 }
 
-// AlarmClock - contracts manager. Obtained by calling <see
-// cref="M:SpaceCenter.ContractManager" />.
-type AlarmClock struct {
+// AlarmManager - alarm manager. Obtained by calling <see
+// cref="M:SpaceCenter.AlarmManager" />.
+type AlarmManager struct {
 	service.BaseClass
 }
 
-// NewAlarmClock creates a new AlarmClock.
-func NewAlarmClock(id uint64, client *krpcgo.KRPCClient) *AlarmClock {
-	c := &AlarmClock{BaseClass: service.BaseClass{Client: client}}
+// NewAlarmManager creates a new AlarmManager.
+func NewAlarmManager(id uint64, client *krpcgo.KRPCClient) *AlarmManager {
+	c := &AlarmManager{BaseClass: service.BaseClass{Client: client}}
 	c.SetID(id)
 	return c
 }
@@ -919,6 +1072,19 @@ type Flight struct {
 // NewFlight creates a new Flight.
 func NewFlight(id uint64, client *krpcgo.KRPCClient) *Flight {
 	c := &Flight{BaseClass: service.BaseClass{Client: client}}
+	c.SetID(id)
+	return c
+}
+
+// LaunchSite - a place where craft can be launched from. More of these can be
+// added with mods like Kerbal Konstructs.
+type LaunchSite struct {
+	service.BaseClass
+}
+
+// NewLaunchSite creates a new LaunchSite.
+func NewLaunchSite(id uint64, client *krpcgo.KRPCClient) *LaunchSite {
+	c := &LaunchSite{BaseClass: service.BaseClass{Client: client}}
 	c.SetID(id)
 	return c
 }
@@ -1243,8 +1409,8 @@ func NewResourceConverter(id uint64, client *krpcgo.KRPCClient) *ResourceConvert
 	return c
 }
 
-// ResourceDrain - a resource drain.  Obtained by calling <see
-// cref="M:SpaceCenter.Part.ResourceDrain" />
+// ResourceDrain - a resource drain. Obtained by calling <see
+// cref="M:SpaceCenter.Part.ResourceDrain" />.
 type ResourceDrain struct {
 	service.BaseClass
 }
@@ -1282,8 +1448,8 @@ func NewRoboticController(id uint64, client *krpcgo.KRPCClient) *RoboticControll
 	return c
 }
 
-// RoboticHinge - a Robotic Hinge Part. Obtained by calling <see
-// cref="M:SpaceCenter.Part.RoboticHinge" />
+// RoboticHinge - a robotic hinge. Obtained by calling <see
+// cref="M:SpaceCenter.Part.RoboticHinge" />.
 type RoboticHinge struct {
 	service.BaseClass
 }
@@ -1295,8 +1461,8 @@ func NewRoboticHinge(id uint64, client *krpcgo.KRPCClient) *RoboticHinge {
 	return c
 }
 
-// RoboticPiston - a Robotic Piston Part. Obtained by calling <see
-// cref="M:SpaceCenter.Part.RoboticPiston" />
+// RoboticPiston - a robotic piston part. Obtained by calling <see
+// cref="M:SpaceCenter.Part.RoboticPiston" />.
 type RoboticPiston struct {
 	service.BaseClass
 }
@@ -1308,8 +1474,8 @@ func NewRoboticPiston(id uint64, client *krpcgo.KRPCClient) *RoboticPiston {
 	return c
 }
 
-// RoboticRotation - a Robotic Rotation servo. Obtained by calling <see
-// cref="M:SpaceCenter.Part.RoboticRotation" />
+// RoboticRotation - a robotic rotation servo. Obtained by calling <see
+// cref="M:SpaceCenter.Part.RoboticRotation" />.
 type RoboticRotation struct {
 	service.BaseClass
 }
@@ -1321,8 +1487,8 @@ func NewRoboticRotation(id uint64, client *krpcgo.KRPCClient) *RoboticRotation {
 	return c
 }
 
-// RoboticRotor - a Robotic Rotor Part. Obtained by calling <see
-// cref="M:SpaceCenter.Part.RoboticRotor" />
+// RoboticRotor - a robotic rotor. Obtained by calling <see
+// cref="M:SpaceCenter.Part.RoboticRotor" />.
 type RoboticRotor struct {
 	service.BaseClass
 }
@@ -1613,7 +1779,7 @@ func (s *SpaceCenter) LaunchableVesselsStream(craftDirectory string) (*krpcgo.St
 // LaunchVessel - launch a vessel.
 //
 // Allowed game scenes: any.
-func (s *SpaceCenter) LaunchVessel(craftDirectory string, name string, launchSite string, recover bool) error {
+func (s *SpaceCenter) LaunchVessel(craftDirectory string, name string, launchSite string, recover bool, crew []string, flagUrl string) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
@@ -1650,6 +1816,22 @@ func (s *SpaceCenter) LaunchVessel(craftDirectory string, name string, launchSit
 	}
 	request.Arguments = append(request.Arguments, &types.Argument{
 		Position: uint32(0x3),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(crew)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x4),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(flagUrl)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x5),
 		Value:    argBytes,
 	})
 	_, err = s.Client.Call(request)
@@ -1802,6 +1984,103 @@ func (s *SpaceCenter) Quickload() error {
 		Procedure: "Quickload",
 		Service:   "SpaceCenter",
 	}
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// CanRevertToLaunch - whether the current flight can be reverted to launch.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) CanRevertToLaunch() (bool, error) {
+	var err error
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "CanRevertToLaunch",
+		Service:   "SpaceCenter",
+	}
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CanRevertToLaunchStream - whether the current flight can be reverted to
+// launch.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) CanRevertToLaunchStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	request := &types.ProcedureCall{
+		Procedure: "CanRevertToLaunch",
+		Service:   "SpaceCenter",
+	}
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// RevertToLaunch - revert the current flight to launch.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) RevertToLaunch() error {
+	var err error
+	request := &types.ProcedureCall{
+		Procedure: "RevertToLaunch",
+		Service:   "SpaceCenter",
+	}
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// TransferCrew - transfers a crew member to a different part.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) TransferCrew(crewMember *CrewMember, targetPart *Part) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "TransferCrew",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(crewMember)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(targetPart)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
 	_, err = s.Client.Call(request)
 	if err != nil {
 		return tracerr.Wrap(err)
@@ -2491,6 +2770,127 @@ func (s *SpaceCenter) RaycastPart(position types.Tuple3[float64, float64, float6
 	return &vv, nil
 }
 
+// CreateKerbal - creates a Kerbal.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) CreateKerbal(name string, job string, male bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CreateKerbal",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(job)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(male)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// GetKerbal - find a Kerbal by name.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) GetKerbal(name string) (*CrewMember, error) {
+	var err error
+	var argBytes []byte
+	var vv CrewMember
+	request := &types.ProcedureCall{
+		Procedure: "GetKerbal",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	vv.Client = s.Client
+	return &vv, nil
+}
+
+// LoadSpaceCenter - switch to the space center view.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) LoadSpaceCenter() error {
+	var err error
+	request := &types.ProcedureCall{
+		Procedure: "LoadSpaceCenter",
+		Service:   "SpaceCenter",
+	}
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// Screenshot - saves a screenshot.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) Screenshot(filePath string, scale int32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Screenshot",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(filePath)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(scale)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // GameMode - the current mode the game is in.
 //
 // Allowed game scenes: any.
@@ -2773,6 +3173,53 @@ func (s *SpaceCenter) VesselsStream() (*krpcgo.Stream[[]*Vessel], error) {
 	return stream, nil
 }
 
+// LaunchSites - a list of available launch sites.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) LaunchSites() ([]*LaunchSite, error) {
+	var err error
+	var vv []*LaunchSite
+	request := &types.ProcedureCall{
+		Procedure: "get_LaunchSites",
+		Service:   "SpaceCenter",
+	}
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// LaunchSitesStream - a list of available launch sites.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) LaunchSitesStream() (*krpcgo.Stream[[]*LaunchSite], error) {
+	var err error
+	request := &types.ProcedureCall{
+		Procedure: "get_LaunchSites",
+		Service:   "SpaceCenter",
+	}
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) []*LaunchSite {
+		var value []*LaunchSite
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
 // Bodies - a dictionary of all celestial bodies (planets, moons, etc.) in the
 // game, keyed by the name of the body.
 //
@@ -3007,14 +3454,14 @@ func (s *SpaceCenter) ContractManager() (*ContractManager, error) {
 	return &vv, nil
 }
 
-// AlarmClock - the Alarm Clock Module.
+// AlarmManager - the alarm manager.
 //
 // Allowed game scenes: any.
-func (s *SpaceCenter) AlarmClock() (*AlarmClock, error) {
+func (s *SpaceCenter) AlarmManager() (*AlarmManager, error) {
 	var err error
-	var vv AlarmClock
+	var vv AlarmManager
 	request := &types.ProcedureCall{
-		Procedure: "get_AlarmClock",
+		Procedure: "get_AlarmManager",
 		Service:   "SpaceCenter",
 	}
 	result, err := s.Client.Call(request)
@@ -3728,7 +4175,147 @@ func (s *SpaceCenter) FARAvailableStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// Type - type of Alarm
+// MapFilter - the visible objects in map mode.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) MapFilter() (MapFilterType, error) {
+	var err error
+	var vv MapFilterType
+	request := &types.ProcedureCall{
+		Procedure: "get_MapFilter",
+		Service:   "SpaceCenter",
+	}
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// MapFilterStream - the visible objects in map mode.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) MapFilterStream() (*krpcgo.Stream[MapFilterType], error) {
+	var err error
+	request := &types.ProcedureCall{
+		Procedure: "get_MapFilter",
+		Service:   "SpaceCenter",
+	}
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) MapFilterType {
+		var value MapFilterType
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetMapFilter - the visible objects in map mode.
+//
+// Allowed game scenes: any.
+func (s *SpaceCenter) SetMapFilter(value MapFilterType) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "set_MapFilter",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// ID - unique identifier of the alarm. KSP destroys and recreates an alarm when
+// it is edited. This id will remain constant between the old and new alarms.
+//
+// Allowed game scenes: any.
+func (s *Alarm) ID() (uint32, error) {
+	var err error
+	var argBytes []byte
+	var vv uint32
+	request := &types.ProcedureCall{
+		Procedure: "Alarm_get_ID",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// IDStream - unique identifier of the alarm. KSP destroys and recreates an
+// alarm when it is edited. This id will remain constant between the old and new
+// alarms.
+//
+// Allowed game scenes: any.
+func (s *Alarm) IDStream() (*krpcgo.Stream[uint32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Alarm_get_ID",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) uint32 {
+		var value uint32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// Type - type of alarm
 //
 // Allowed game scenes: any.
 func (s *Alarm) Type() (string, error) {
@@ -3758,7 +4345,7 @@ func (s *Alarm) Type() (string, error) {
 	return vv, nil
 }
 
-// TypeStream - type of Alarm
+// TypeStream - type of alarm
 //
 // Allowed game scenes: any.
 func (s *Alarm) TypeStream() (*krpcgo.Stream[string], error) {
@@ -3793,7 +4380,7 @@ func (s *Alarm) TypeStream() (*krpcgo.Stream[string], error) {
 	return stream, nil
 }
 
-// Title - title of the Alarm
+// Title - title of the alarm
 //
 // Allowed game scenes: any.
 func (s *Alarm) Title() (string, error) {
@@ -3823,7 +4410,7 @@ func (s *Alarm) Title() (string, error) {
 	return vv, nil
 }
 
-// TitleStream - title of the Alarm
+// TitleStream - title of the alarm
 //
 // Allowed game scenes: any.
 func (s *Alarm) TitleStream() (*krpcgo.Stream[string], error) {
@@ -3858,7 +4445,7 @@ func (s *Alarm) TitleStream() (*krpcgo.Stream[string], error) {
 	return stream, nil
 }
 
-// Description - description of the contract.
+// Description - description of the alarm.
 //
 // Allowed game scenes: any.
 func (s *Alarm) Description() (string, error) {
@@ -3888,7 +4475,7 @@ func (s *Alarm) Description() (string, error) {
 	return vv, nil
 }
 
-// DescriptionStream - description of the contract.
+// DescriptionStream - description of the alarm.
 //
 // Allowed game scenes: any.
 func (s *Alarm) DescriptionStream() (*krpcgo.Stream[string], error) {
@@ -3923,15 +4510,15 @@ func (s *Alarm) DescriptionStream() (*krpcgo.Stream[string], error) {
 	return stream, nil
 }
 
-// UT - time the Alarm will trigger
+// Time - time the alarm will trigger.
 //
 // Allowed game scenes: any.
-func (s *Alarm) UT() (float64, error) {
+func (s *Alarm) Time() (float64, error) {
 	var err error
 	var argBytes []byte
 	var vv float64
 	request := &types.ProcedureCall{
-		Procedure: "Alarm_get_UT",
+		Procedure: "Alarm_get_Time",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -3953,14 +4540,14 @@ func (s *Alarm) UT() (float64, error) {
 	return vv, nil
 }
 
-// UTStream - time the Alarm will trigger
+// TimeStream - time the alarm will trigger.
 //
 // Allowed game scenes: any.
-func (s *Alarm) UTStream() (*krpcgo.Stream[float64], error) {
+func (s *Alarm) TimeStream() (*krpcgo.Stream[float64], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "Alarm_get_UT",
+		Procedure: "Alarm_get_Time",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -3988,15 +4575,15 @@ func (s *Alarm) UTStream() (*krpcgo.Stream[float64], error) {
 	return stream, nil
 }
 
-// TimeTill - time until the alarm triggers
+// TimeUntil - time until the alarm triggers.
 //
 // Allowed game scenes: any.
-func (s *Alarm) TimeTill() (float64, error) {
+func (s *Alarm) TimeUntil() (float64, error) {
 	var err error
 	var argBytes []byte
 	var vv float64
 	request := &types.ProcedureCall{
-		Procedure: "Alarm_get_TimeTill",
+		Procedure: "Alarm_get_TimeUntil",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4018,14 +4605,14 @@ func (s *Alarm) TimeTill() (float64, error) {
 	return vv, nil
 }
 
-// TimeTillStream - time until the alarm triggers
+// TimeUntilStream - time until the alarm triggers.
 //
 // Allowed game scenes: any.
-func (s *Alarm) TimeTillStream() (*krpcgo.Stream[float64], error) {
+func (s *Alarm) TimeUntilStream() (*krpcgo.Stream[float64], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "Alarm_get_TimeTill",
+		Procedure: "Alarm_get_TimeUntil",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4053,7 +4640,8 @@ func (s *Alarm) TimeTillStream() (*krpcgo.Stream[float64], error) {
 	return stream, nil
 }
 
-// EventOffset - seconds betwen the alarm going off and the event it references
+// EventOffset - seconds between the alarm going off and the event it
+// references.
 //
 // Allowed game scenes: any.
 func (s *Alarm) EventOffset() (float64, error) {
@@ -4083,8 +4671,8 @@ func (s *Alarm) EventOffset() (float64, error) {
 	return vv, nil
 }
 
-// EventOffsetStream - seconds betwen the alarm going off and the event it
-// references
+// EventOffsetStream - seconds between the alarm going off and the event it
+// references.
 //
 // Allowed game scenes: any.
 func (s *Alarm) EventOffsetStream() (*krpcgo.Stream[float64], error) {
@@ -4119,7 +4707,7 @@ func (s *Alarm) EventOffsetStream() (*krpcgo.Stream[float64], error) {
 	return stream, nil
 }
 
-// Vessel - vessel the alarm references
+// Vessel - vessel the alarm references. nil if it does not reference a vessel.
 //
 // Allowed game scenes: any.
 func (s *Alarm) Vessel() (*Vessel, error) {
@@ -4150,88 +4738,15 @@ func (s *Alarm) Vessel() (*Vessel, error) {
 	return &vv, nil
 }
 
-// ID - unique ID of alarm KSP destroys an old alarm and creates a new one each
-// time an alarm is edited. This ID will remain constant between the old and new
-// alarms though, so this is the value you want to store and each time you want
-// to access an alarm, get the current alarm with the  correct ID value.
+// AddAlarm - create an alarm.
 //
 // Allowed game scenes: any.
-func (s *Alarm) ID() (int32, error) {
-	var err error
-	var argBytes []byte
-	var vv int32
-	request := &types.ProcedureCall{
-		Procedure: "Alarm_get_ID",
-		Service:   "SpaceCenter",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	result, err := s.Client.Call(request)
-	if err != nil {
-		return vv, tracerr.Wrap(err)
-	}
-	err = encode.Unmarshal(result.Value, &vv)
-	if err != nil {
-		return vv, tracerr.Wrap(err)
-	}
-	return vv, nil
-}
-
-// IDStream - unique IDStream of alarm KSP destroys an old alarm and creates a
-// new one each time an alarm is edited. This IDStream will remain constant
-// between the old and new alarms though, so this is the value you want to store
-// and each time you want to access an alarm, get the current alarm with the
-// correct IDStream value.
-//
-// Allowed game scenes: any.
-func (s *Alarm) IDStream() (*krpcgo.Stream[int32], error) {
-	var err error
-	var argBytes []byte
-	request := &types.ProcedureCall{
-		Procedure: "Alarm_get_ID",
-		Service:   "SpaceCenter",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return nil, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	krpc := krpc.New(s.Client)
-	st, err := krpc.AddStream(request, true)
-	if err != nil {
-		return nil, tracerr.Wrap(err)
-	}
-	rawStream := s.Client.GetStream(st.Id)
-	stream := krpcgo.MapStream(rawStream, func(b []byte) int32 {
-		var value int32
-		encode.Unmarshal(b, &value)
-		return value
-	})
-	stream.AddCloser(func() error {
-		return tracerr.Wrap(krpc.RemoveStream(st.Id))
-	})
-	return stream, nil
-}
-
-// MakeRawAlarm - make a Simple Alarm Parameter 'time' is the number of seconds
-// from now that the alarm should trigger.
-//
-// Allowed game scenes: any.
-func (s *AlarmClock) MakeRawAlarm(time float64, title string, description string) (*Alarm, error) {
+func (s *AlarmManager) AddAlarm(title string, description string) (*Alarm, error) {
 	var err error
 	var argBytes []byte
 	var vv Alarm
 	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_MakeRawAlarm",
+		Procedure: "AlarmManager_static_AddAlarm",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4242,7 +4757,54 @@ func (s *AlarmClock) MakeRawAlarm(time float64, title string, description string
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(time)
+	argBytes, err = encode.Marshal(title)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(description)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	vv.Client = s.Client
+	return &vv, nil
+}
+
+// AddVesselAlarm - create an alarm linked to a vessel.
+//
+// Allowed game scenes: any.
+func (s *AlarmManager) AddVesselAlarm(vessel *Vessel, title string, description string) (*Alarm, error) {
+	var err error
+	var argBytes []byte
+	var vv Alarm
+	request := &types.ProcedureCall{
+		Procedure: "AlarmManager_static_AddVesselAlarm",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(vessel)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4278,16 +4840,15 @@ func (s *AlarmClock) MakeRawAlarm(time float64, title string, description string
 	return &vv, nil
 }
 
-// MakeRawAlarmVessel - make a Simple Alarm linked to a Vessel Parameter 'time'
-// is the number of seconds from now that the alarm should trigger.
+// AddApoapsisAlarm - create an alarm for the given vessel's next apoapsis.
 //
 // Allowed game scenes: any.
-func (s *AlarmClock) MakeRawAlarmVessel(time float64, V *Vessel, title string, description string) (*Alarm, error) {
+func (s *AlarmManager) AddApoapsisAlarm(offset float64, title string, description string) (*Alarm, error) {
 	var err error
 	var argBytes []byte
 	var vv Alarm
 	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_MakeRawAlarmVessel",
+		Procedure: "AlarmManager_static_AddApoapsisAlarm",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4298,7 +4859,7 @@ func (s *AlarmClock) MakeRawAlarmVessel(time float64, V *Vessel, title string, d
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(time)
+	argBytes, err = encode.Marshal(offset)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4306,7 +4867,7 @@ func (s *AlarmClock) MakeRawAlarmVessel(time float64, V *Vessel, title string, d
 		Position: uint32(0x1),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(V)
+	argBytes, err = encode.Marshal(title)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4314,20 +4875,12 @@ func (s *AlarmClock) MakeRawAlarmVessel(time float64, V *Vessel, title string, d
 		Position: uint32(0x2),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(title)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x3),
-		Value:    argBytes,
-	})
 	argBytes, err = encode.Marshal(description)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
 	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x4),
+		Position: uint32(0x3),
 		Value:    argBytes,
 	})
 	result, err := s.Client.Call(request)
@@ -4342,15 +4895,15 @@ func (s *AlarmClock) MakeRawAlarmVessel(time float64, V *Vessel, title string, d
 	return &vv, nil
 }
 
-// MakeApaAlarm - create an alarm for the given vessel's next Apoapsis
+// AddPeriapsisAlarm - create an alarm for the given vessel's next periapsis.
 //
 // Allowed game scenes: any.
-func (s *AlarmClock) MakeApaAlarm(V *Vessel, offset float64, title string, description string) (*Alarm, error) {
+func (s *AlarmManager) AddPeriapsisAlarm(offset float64, title string, description string) (*Alarm, error) {
 	var err error
 	var argBytes []byte
 	var vv Alarm
 	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_MakeApaAlarm",
+		Procedure: "AlarmManager_static_AddPeriapsisAlarm",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4361,7 +4914,63 @@ func (s *AlarmClock) MakeApaAlarm(V *Vessel, offset float64, title string, descr
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(V)
+	argBytes, err = encode.Marshal(offset)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(title)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(description)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x3),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	vv.Client = s.Client
+	return &vv, nil
+}
+
+// AddManeuverNodeAlarm - create an alarm for the given vessel and maneuver
+// node.
+//
+// Allowed game scenes: any.
+func (s *AlarmManager) AddManeuverNodeAlarm(node *Node, offset float64, addBurnTime bool, title string, description string) (*Alarm, error) {
+	var err error
+	var argBytes []byte
+	var vv Alarm
+	request := &types.ProcedureCall{
+		Procedure: "AlarmManager_static_AddManeuverNodeAlarm",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(node)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4377,149 +4986,23 @@ func (s *AlarmClock) MakeApaAlarm(V *Vessel, offset float64, title string, descr
 		Position: uint32(0x2),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(title)
+	argBytes, err = encode.Marshal(addBurnTime)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
 	request.Arguments = append(request.Arguments, &types.Argument{
 		Position: uint32(0x3),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(title)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x4),
 		Value:    argBytes,
 	})
 	argBytes, err = encode.Marshal(description)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x4),
-		Value:    argBytes,
-	})
-	result, err := s.Client.Call(request)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	err = encode.Unmarshal(result.Value, &vv)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	vv.Client = s.Client
-	return &vv, nil
-}
-
-// MakePeaAlarm - create an alarm for the given vessel's next Periapsis
-//
-// Allowed game scenes: any.
-func (s *AlarmClock) MakePeaAlarm(V *Vessel, offset float64, title string, description string) (*Alarm, error) {
-	var err error
-	var argBytes []byte
-	var vv Alarm
-	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_MakePeaAlarm",
-		Service:   "SpaceCenter",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(V)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x1),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(offset)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x2),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(title)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x3),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(description)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x4),
-		Value:    argBytes,
-	})
-	result, err := s.Client.Call(request)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	err = encode.Unmarshal(result.Value, &vv)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	vv.Client = s.Client
-	return &vv, nil
-}
-
-// MakeManeuverAlarm - create an alarm for the given vessel and maneuver node
-//
-// Allowed game scenes: any.
-func (s *AlarmClock) MakeManeuverAlarm(V *Vessel, Man *Node, offset float64, AddBurnTime bool, title string, description string) (*Alarm, error) {
-	var err error
-	var argBytes []byte
-	var vv Alarm
-	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_MakeManeuverAlarm",
-		Service:   "SpaceCenter",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(V)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x1),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(Man)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x2),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(offset)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x3),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(AddBurnTime)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x4),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(title)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4527,14 +5010,6 @@ func (s *AlarmClock) MakeManeuverAlarm(V *Vessel, Man *Node, offset float64, Add
 		Position: uint32(0x5),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(description)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x6),
-		Value:    argBytes,
-	})
 	result, err := s.Client.Call(request)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
@@ -4547,15 +5022,16 @@ func (s *AlarmClock) MakeManeuverAlarm(V *Vessel, Man *Node, offset float64, Add
 	return &vv, nil
 }
 
-// MakeSOIAlarm - create an alarm for the given vessel's next SOI change
+// AddSOIAlarm - create an alarm for the given vessel's next sphere of influence
+// change.
 //
 // Allowed game scenes: any.
-func (s *AlarmClock) MakeSOIAlarm(V *Vessel, offset float64, title string, description string) (*Alarm, error) {
+func (s *AlarmManager) AddSOIAlarm(offset float64, title string, description string) (*Alarm, error) {
 	var err error
 	var argBytes []byte
 	var vv Alarm
 	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_MakeSOIAlarm",
+		Procedure: "AlarmManager_static_AddSOIAlarm",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4566,7 +5042,7 @@ func (s *AlarmClock) MakeSOIAlarm(V *Vessel, offset float64, title string, descr
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(V)
+	argBytes, err = encode.Marshal(offset)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4574,7 +5050,7 @@ func (s *AlarmClock) MakeSOIAlarm(V *Vessel, offset float64, title string, descr
 		Position: uint32(0x1),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(offset)
+	argBytes, err = encode.Marshal(title)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
@@ -4582,20 +5058,12 @@ func (s *AlarmClock) MakeSOIAlarm(V *Vessel, offset float64, title string, descr
 		Position: uint32(0x2),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(title)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x3),
-		Value:    argBytes,
-	})
 	argBytes, err = encode.Marshal(description)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
 	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x4),
+		Position: uint32(0x3),
 		Value:    argBytes,
 	})
 	result, err := s.Client.Call(request)
@@ -4610,15 +5078,15 @@ func (s *AlarmClock) MakeSOIAlarm(V *Vessel, offset float64, title string, descr
 	return &vv, nil
 }
 
-// GetAlarms - returns a list of all alarms
+// Alarms - a list of all alarms.
 //
 // Allowed game scenes: any.
-func (s *AlarmClock) GetAlarms() ([]*Alarm, error) {
+func (s *AlarmManager) Alarms() ([]*Alarm, error) {
 	var err error
 	var argBytes []byte
 	var vv []*Alarm
 	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_GetAlarms",
+		Procedure: "AlarmManager_get_Alarms",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -4640,14 +5108,14 @@ func (s *AlarmClock) GetAlarms() ([]*Alarm, error) {
 	return vv, nil
 }
 
-// GetAlarmsStream - returns a list of all alarms
+// AlarmsStream - a list of all alarms.
 //
 // Allowed game scenes: any.
-func (s *AlarmClock) GetAlarmsStream() (*krpcgo.Stream[[]*Alarm], error) {
+func (s *AlarmManager) AlarmsStream() (*krpcgo.Stream[[]*Alarm], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "AlarmClock_GetAlarms",
+		Procedure: "AlarmManager_get_Alarms",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -10311,6 +10779,136 @@ func (s *CelestialBody) Orbit() (*Orbit, error) {
 	}
 	vv.Client = s.Client
 	return &vv, nil
+}
+
+// IsStar - whether or not the body is a star.
+//
+// Allowed game scenes: any.
+func (s *CelestialBody) IsStar() (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "CelestialBody_get_IsStar",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// IsStarStream - whether or not the body is a star.
+//
+// Allowed game scenes: any.
+func (s *CelestialBody) IsStarStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CelestialBody_get_IsStar",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// HasSolidSurface - whether or not the body has a solid surface.
+//
+// Allowed game scenes: any.
+func (s *CelestialBody) HasSolidSurface() (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "CelestialBody_get_HasSolidSurface",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// HasSolidSurfaceStream - whether or not the body has a solid surface.
+//
+// Allowed game scenes: any.
+func (s *CelestialBody) HasSolidSurfaceStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CelestialBody_get_HasSolidSurface",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
 }
 
 // HasAtmosphere - true if the body has an atmosphere.
@@ -17661,6 +18259,402 @@ func (s *Control) SetWheelSteering(value float32) error {
 	return nil
 }
 
+// CustomAxis01 - the state of CustomAxis01. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis01() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis01",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CustomAxis01Stream - the state of CustomAxis01Stream. A value between -1 and
+// 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis01Stream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis01",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetCustomAxis01 - the state of CustomAxis01. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) SetCustomAxis01(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_set_CustomAxis01",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// CustomAxis02 - the state of CustomAxis02. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis02() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis02",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CustomAxis02Stream - the state of CustomAxis02Stream. A value between -1 and
+// 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis02Stream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis02",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetCustomAxis02 - the state of CustomAxis02. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) SetCustomAxis02(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_set_CustomAxis02",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// CustomAxis03 - the state of CustomAxis03. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis03() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis03",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CustomAxis03Stream - the state of CustomAxis03Stream. A value between -1 and
+// 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis03Stream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis03",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetCustomAxis03 - the state of CustomAxis03. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) SetCustomAxis03(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_set_CustomAxis03",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// CustomAxis04 - the state of CustomAxis04. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis04() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis04",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CustomAxis04Stream - the state of CustomAxis04Stream. A value between -1 and
+// 1.
+//
+// Allowed game scenes: any.
+func (s *Control) CustomAxis04Stream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_get_CustomAxis04",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetCustomAxis04 - the state of CustomAxis04. A value between -1 and 1.
+//
+// Allowed game scenes: any.
+func (s *Control) SetCustomAxis04(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Control_set_CustomAxis04",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // CurrentStage - the current stage of the vessel. Corresponds to the stage
 // number in the in-game UI.
 //
@@ -18609,6 +19603,496 @@ func (s *CrewMember) SetVeteran(value bool) error {
 		return tracerr.Wrap(err)
 	}
 	return nil
+}
+
+// Trait - the crew member's job.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) Trait() (string, error) {
+	var err error
+	var argBytes []byte
+	var vv string
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_Trait",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// TraitStream - the crew member's job.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) TraitStream() (*krpcgo.Stream[string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_Trait",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) string {
+		var value string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// Gender - the crew member's gender.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) Gender() (CrewMemberGender, error) {
+	var err error
+	var argBytes []byte
+	var vv CrewMemberGender
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_Gender",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// GenderStream - the crew member's gender.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) GenderStream() (*krpcgo.Stream[CrewMemberGender], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_Gender",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) CrewMemberGender {
+		var value CrewMemberGender
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// RosterStatus - the crew member's current roster status.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) RosterStatus() (RosterStatus, error) {
+	var err error
+	var argBytes []byte
+	var vv RosterStatus
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_RosterStatus",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// RosterStatusStream - the crew member's current roster status.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) RosterStatusStream() (*krpcgo.Stream[RosterStatus], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_RosterStatus",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) RosterStatus {
+		var value RosterStatus
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SuitType - the crew member's suit type.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) SuitType() (SuitType, error) {
+	var err error
+	var argBytes []byte
+	var vv SuitType
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_SuitType",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// SuitTypeStream - the crew member's suit type.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) SuitTypeStream() (*krpcgo.Stream[SuitType], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_SuitType",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) SuitType {
+		var value SuitType
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetSuitType - the crew member's suit type.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) SetSuitType(value SuitType) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_set_SuitType",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// CareerLogFlights - the flight IDs for each entry in the career flight log.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) CareerLogFlights() ([]int32, error) {
+	var err error
+	var argBytes []byte
+	var vv []int32
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_CareerLogFlights",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CareerLogFlightsStream - the flight IDs for each entry in the career flight
+// log.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) CareerLogFlightsStream() (*krpcgo.Stream[[]int32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_CareerLogFlights",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) []int32 {
+		var value []int32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// CareerLogTypes - the type for each entry in the career flight log.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) CareerLogTypes() ([]string, error) {
+	var err error
+	var argBytes []byte
+	var vv []string
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_CareerLogTypes",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CareerLogTypesStream - the type for each entry in the career flight log.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) CareerLogTypesStream() (*krpcgo.Stream[[]string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_CareerLogTypes",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) []string {
+		var value []string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// CareerLogTargets - the body name for each entry in the career flight log.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) CareerLogTargets() ([]string, error) {
+	var err error
+	var argBytes []byte
+	var vv []string
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_CareerLogTargets",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CareerLogTargetsStream - the body name for each entry in the career flight
+// log.
+//
+// Allowed game scenes: any.
+func (s *CrewMember) CareerLogTargetsStream() (*krpcgo.Stream[[]string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "CrewMember_get_CareerLogTargets",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) []string {
+		var value []string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
 }
 
 // SimulateAerodynamicForceAt - simulate and return the total aerodynamic forces
@@ -21769,6 +23253,167 @@ func (s *Flight) ThrustSpecificFuelConsumptionStream() (*krpcgo.Stream[float32],
 	rawStream := s.Client.GetStream(st.Id)
 	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
 		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// Name - the name of the launch site.
+//
+// Allowed game scenes: any.
+func (s *LaunchSite) Name() (string, error) {
+	var err error
+	var argBytes []byte
+	var vv string
+	request := &types.ProcedureCall{
+		Procedure: "LaunchSite_get_Name",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// NameStream - the name of the launch site.
+//
+// Allowed game scenes: any.
+func (s *LaunchSite) NameStream() (*krpcgo.Stream[string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "LaunchSite_get_Name",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) string {
+		var value string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// Body - the celestial body the launch site is on.
+//
+// Allowed game scenes: any.
+func (s *LaunchSite) Body() (*CelestialBody, error) {
+	var err error
+	var argBytes []byte
+	var vv CelestialBody
+	request := &types.ProcedureCall{
+		Procedure: "LaunchSite_get_Body",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	vv.Client = s.Client
+	return &vv, nil
+}
+
+// EditorFacility - which editor is normally used for this launch site.
+//
+// Allowed game scenes: any.
+func (s *LaunchSite) EditorFacility() (EditorFacility, error) {
+	var err error
+	var argBytes []byte
+	var vv EditorFacility
+	request := &types.ProcedureCall{
+		Procedure: "LaunchSite_get_EditorFacility",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// EditorFacilityStream - which editor is normally used for this launch site.
+//
+// Allowed game scenes: any.
+func (s *LaunchSite) EditorFacilityStream() (*krpcgo.Stream[EditorFacility], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "LaunchSite_get_EditorFacility",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) EditorFacility {
+		var value EditorFacility
 		encode.Unmarshal(b, &value)
 		return value
 	})
@@ -28544,6 +30189,401 @@ func (s *DockingPort) SetShielded(value bool) error {
 	return nil
 }
 
+// CanRotate - whether the docking port can be commanded to rotate while docked.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) CanRotate() (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_CanRotate",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// CanRotateStream - whether the docking port can be commanded to rotate while
+// docked.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) CanRotateStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_CanRotate",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// MaximumRotation - maximum rotation angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) MaximumRotation() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_MaximumRotation",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// MaximumRotationStream - maximum rotation angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) MaximumRotationStream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_MaximumRotation",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// MinimumRotation - minimum rotation angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) MinimumRotation() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_MinimumRotation",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// MinimumRotationStream - minimum rotation angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) MinimumRotationStream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_MinimumRotation",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// RotationTarget - rotation target angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) RotationTarget() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_RotationTarget",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// RotationTargetStream - rotation target angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) RotationTargetStream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_RotationTarget",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetRotationTarget - rotation target angle in degrees.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) SetRotationTarget(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_set_RotationTarget",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// RotationLocked - lock rotation. When locked, allows auto-strut to work across
+// the joint.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) RotationLocked() (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_RotationLocked",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// RotationLockedStream - lock rotation. When locked, allows auto-strut to work
+// across the joint.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) RotationLockedStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_get_RotationLocked",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetRotationLocked - lock rotation. When locked, allows auto-strut to work
+// across the joint.
+//
+// Allowed game scenes: any.
+func (s *DockingPort) SetRotationLocked(value bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "DockingPort_set_RotationLocked",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // ReferenceFrame - the reference frame that is fixed relative to this docking
 // port, and oriented with the port. <list type="bullet"><item><description>The
 // origin is at the position of the docking port.
@@ -28581,6 +30621,260 @@ func (s *DockingPort) ReferenceFrame() (*ReferenceFrame, error) {
 	}
 	vv.Client = s.Client
 	return &vv, nil
+}
+
+// AvailableThrustAt - the amount of thrust, in Newtons, that would be produced
+// by the engine when activated and with its throttle set to 100%. Returns zero
+// if the engine does not have any fuel. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Engine) AvailableThrustAt(pressure float64) (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Engine_AvailableThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// AvailableThrustAtStream - the amount of thrust, in Newtons, that would be
+// produced by the engine when activated and with its throttle set to 100%.
+// Returns zero if the engine does not have any fuel. Takes the given pressure
+// into account.
+//
+// Allowed game scenes: any.
+func (s *Engine) AvailableThrustAtStream(pressure float64) (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Engine_AvailableThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// MaxThrustAt - the amount of thrust, in Newtons, that would be produced by the
+// engine when activated and fueled, with its throttle and throttle limiter set
+// to 100%. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Engine) MaxThrustAt(pressure float64) (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Engine_MaxThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// MaxThrustAtStream - the amount of thrust, in Newtons, that would be produced
+// by the engine when activated and fueled, with its throttle and throttle
+// limiter set to 100%. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Engine) MaxThrustAtStream(pressure float64) (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Engine_MaxThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SpecificImpulseAt - the specific impulse of the engine under the given
+// pressure, in seconds. Returns zero if the engine is not active.
+//
+// Allowed game scenes: any.
+func (s *Engine) SpecificImpulseAt(pressure float64) (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Engine_SpecificImpulseAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// SpecificImpulseAtStream - the specific impulse of the engine under the given
+// pressure, in seconds. Returns zero if the engine is not active.
+//
+// Allowed game scenes: any.
+func (s *Engine) SpecificImpulseAtStream(pressure float64) (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Engine_SpecificImpulseAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
 }
 
 // ToggleMode - toggle the current engine mode.
@@ -29662,7 +31956,10 @@ func (s *Engine) HasFuelStream() (*krpcgo.Stream[bool], error) {
 
 // Throttle - the current throttle setting for the engine. A value between 0 and
 // 1. This is not necessarily the same as the vessel's main throttle setting, as
-// some engines take time to adjust their throttle (such as jet engines).
+// some engines take time to adjust their throttle (such as jet engines), or
+// independent throttle may be enabled.  When the engine's independent throttle
+// is enabled (see <see cref="M:SpaceCenter.Engine.IndependentThrottle" />), can
+// be used to set the throttle percentage.
 //
 // Allowed game scenes: any.
 func (s *Engine) Throttle() (float32, error) {
@@ -29695,7 +31992,10 @@ func (s *Engine) Throttle() (float32, error) {
 // ThrottleStream - the current throttle setting for the engine. A value between
 // 0 and 1. This is not necessarily the same as the vessel's main throttle
 // setting, as some engines take time to adjust their throttle (such as jet
-// engines).
+// engines), or independent throttle may be enabled.  When the engine's
+// independent throttle is enabled (see <see
+// cref="M:SpaceCenter.Engine.IndependentThrottleStream" />), can be used to set
+// the throttle percentage.
 //
 // Allowed game scenes: any.
 func (s *Engine) ThrottleStream() (*krpcgo.Stream[float32], error) {
@@ -29728,6 +32028,45 @@ func (s *Engine) ThrottleStream() (*krpcgo.Stream[float32], error) {
 		return tracerr.Wrap(krpc.RemoveStream(st.Id))
 	})
 	return stream, nil
+}
+
+// SetThrottle - the current throttle setting for the engine. A value between 0
+// and 1. This is not necessarily the same as the vessel's main throttle
+// setting, as some engines take time to adjust their throttle (such as jet
+// engines), or independent throttle may be enabled.  When the engine's
+// independent throttle is enabled (see <see
+// cref="M:SpaceCenter.Engine.IndependentThrottle" />), can be used to set the
+// throttle percentage.
+//
+// Allowed game scenes: any.
+func (s *Engine) SetThrottle(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Engine_set_Throttle",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
 }
 
 // ThrottleLocked - whether the <see cref="M:SpaceCenter.Control.Throttle" />
@@ -29797,6 +32136,107 @@ func (s *Engine) ThrottleLockedStream() (*krpcgo.Stream[bool], error) {
 		return tracerr.Wrap(krpc.RemoveStream(st.Id))
 	})
 	return stream, nil
+}
+
+// IndependentThrottle - whether the independent throttle is enabled for the
+// engine.
+//
+// Allowed game scenes: any.
+func (s *Engine) IndependentThrottle() (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "Engine_get_IndependentThrottle",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// IndependentThrottleStream - whether the independent throttle is enabled for
+// the engine.
+//
+// Allowed game scenes: any.
+func (s *Engine) IndependentThrottleStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Engine_get_IndependentThrottle",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetIndependentThrottle - whether the independent throttle is enabled for the
+// engine.
+//
+// Allowed game scenes: any.
+func (s *Engine) SetIndependentThrottle(value bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Engine_set_IndependentThrottle",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
 }
 
 // CanRestart - whether the engine can be restarted once shutdown. If the engine
@@ -32800,6 +35240,202 @@ func (s *Light) SetColor(value types.Tuple3[float32, float32, float32]) error {
 	return nil
 }
 
+// Blink - whether blinking is enabled.
+//
+// Allowed game scenes: any.
+func (s *Light) Blink() (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "Light_get_Blink",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// BlinkStream - whether blinking is enabled.
+//
+// Allowed game scenes: any.
+func (s *Light) BlinkStream() (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Light_get_Blink",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetBlink - whether blinking is enabled.
+//
+// Allowed game scenes: any.
+func (s *Light) SetBlink(value bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Light_set_Blink",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// BlinkRate - the blink rate of the light.
+//
+// Allowed game scenes: any.
+func (s *Light) BlinkRate() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Light_get_BlinkRate",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// BlinkRateStream - the blink rate of the light.
+//
+// Allowed game scenes: any.
+func (s *Light) BlinkRateStream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Light_get_BlinkRate",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetBlinkRate - the blink rate of the light.
+//
+// Allowed game scenes: any.
+func (s *Light) SetBlinkRate(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Light_set_BlinkRate",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // PowerUsage - the current power usage, in units of charge per second.
 //
 // Allowed game scenes: any.
@@ -32946,7 +35582,90 @@ func (s *Module) HasFieldStream(name string) (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// GetField - returns the value of a field.
+// HasFieldWithId - returns true if the module has a field with the given
+// identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) HasFieldWithId(id string) (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "Module_HasFieldWithId",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// HasFieldWithIdStream - returns true if the module has a field with the given
+// identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) HasFieldWithIdStream(id string) (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_HasFieldWithId",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// GetField - returns the value of a field with the given name.
 //
 // Allowed game scenes: any.
 func (s *Module) GetField(name string) (string, error) {
@@ -32984,7 +35703,7 @@ func (s *Module) GetField(name string) (string, error) {
 	return vv, nil
 }
 
-// GetFieldStream - returns the value of a field.
+// GetFieldStream - returns the value of a field with the given name.
 //
 // Allowed game scenes: any.
 func (s *Module) GetFieldStream(name string) (*krpcgo.Stream[string], error) {
@@ -33003,6 +35722,87 @@ func (s *Module) GetFieldStream(name string) (*krpcgo.Stream[string], error) {
 		Value:    argBytes,
 	})
 	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) string {
+		var value string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// GetFieldById - returns the value of a field with the given identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) GetFieldById(id string) (string, error) {
+	var err error
+	var argBytes []byte
+	var vv string
+	request := &types.ProcedureCall{
+		Procedure: "Module_GetFieldById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// GetFieldByIdStream - returns the value of a field with the given identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) GetFieldByIdStream(id string) (*krpcgo.Stream[string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_GetFieldById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
 	if err != nil {
 		return nil, tracerr.Wrap(err)
 	}
@@ -33068,6 +35868,47 @@ func (s *Module) SetFieldInt(name string, value int32) error {
 	return nil
 }
 
+// SetFieldIntById - set the value of a field to the given integer number.
+//
+// Allowed game scenes: any.
+func (s *Module) SetFieldIntById(id string, value int32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_SetFieldIntById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // SetFieldFloat - set the value of a field to the given floating point number.
 //
 // Allowed game scenes: any.
@@ -33087,6 +35928,48 @@ func (s *Module) SetFieldFloat(name string, value float32) error {
 		Value:    argBytes,
 	})
 	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// SetFieldFloatById - set the value of a field to the given floating point
+// number.
+//
+// Allowed game scenes: any.
+func (s *Module) SetFieldFloatById(id string, value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_SetFieldFloatById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
 	if err != nil {
 		return tracerr.Wrap(err)
 	}
@@ -33150,6 +36033,129 @@ func (s *Module) SetFieldString(name string, value string) error {
 	return nil
 }
 
+// SetFieldStringById - set the value of a field to the given string.
+//
+// Allowed game scenes: any.
+func (s *Module) SetFieldStringById(id string, value string) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_SetFieldStringById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// SetFieldBool - set the value of a field to true or false.
+//
+// Allowed game scenes: any.
+func (s *Module) SetFieldBool(name string, value bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_SetFieldBool",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// SetFieldBoolById - set the value of a field to true or false.
+//
+// Allowed game scenes: any.
+func (s *Module) SetFieldBoolById(id string, value bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_SetFieldBoolById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // ResetField - set the value of a field to its original value.
 //
 // Allowed game scenes: any.
@@ -33169,6 +36175,39 @@ func (s *Module) ResetField(name string) error {
 		Value:    argBytes,
 	})
 	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// ResetFieldById - set the value of a field to its original value.
+//
+// Allowed game scenes: any.
+func (s *Module) ResetFieldById(id string) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_ResetFieldById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
 	if err != nil {
 		return tracerr.Wrap(err)
 	}
@@ -33264,6 +36303,88 @@ func (s *Module) HasEventStream(name string) (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
+// HasEventWithId - true if the module has an event with the given identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) HasEventWithId(id string) (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "Module_HasEventWithId",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// HasEventWithIdStream - true if the module has an event with the given
+// identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) HasEventWithIdStream(id string) (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_HasEventWithId",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
 // TriggerEvent - trigger the named event. Equivalent to clicking the button in
 // the right-click menu of the part.
 //
@@ -33284,6 +36405,40 @@ func (s *Module) TriggerEvent(name string) error {
 		Value:    argBytes,
 	})
 	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// TriggerEventById - trigger the event with the given identifier. Equivalent to
+// clicking the button in the right-click menu of the part.
+//
+// Allowed game scenes: any.
+func (s *Module) TriggerEventById(id string) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_TriggerEventById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
 	if err != nil {
 		return tracerr.Wrap(err)
 	}
@@ -33379,6 +36534,88 @@ func (s *Module) HasActionStream(name string) (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
+// HasActionWithId - true if the part has an action with the given identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) HasActionWithId(id string) (bool, error) {
+	var err error
+	var argBytes []byte
+	var vv bool
+	request := &types.ProcedureCall{
+		Procedure: "Module_HasActionWithId",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// HasActionWithIdStream - true if the part has an action with the given
+// identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) HasActionWithIdStream(id string) (*krpcgo.Stream[bool], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_HasActionWithId",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) bool {
+		var value bool
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
 // SetAction - set the value of an action with the given name.
 //
 // Allowed game scenes: any.
@@ -33398,6 +36635,47 @@ func (s *Module) SetAction(name string, value bool) error {
 		Value:    argBytes,
 	})
 	argBytes, err = encode.Marshal(name)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x2),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// SetActionById - set the value of an action with the given identifier.
+//
+// Allowed game scenes: any.
+func (s *Module) SetActionById(id string, value bool) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_SetActionById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(id)
 	if err != nil {
 		return tracerr.Wrap(err)
 	}
@@ -33583,6 +36861,74 @@ func (s *Module) FieldsStream() (*krpcgo.Stream[map[string]string], error) {
 	return stream, nil
 }
 
+// FieldsById - the modules field identifiers and their associated values, as a
+// dictionary. These are the values visible in the right-click menu of the part.
+//
+// Allowed game scenes: any.
+func (s *Module) FieldsById() (map[string]string, error) {
+	var err error
+	var argBytes []byte
+	var vv map[string]string
+	request := &types.ProcedureCall{
+		Procedure: "Module_get_FieldsById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// FieldsByIdStream - the modules field identifiers and their associated values,
+// as a dictionary. These are the values visible in the right-click menu of the
+// part.
+//
+// Allowed game scenes: any.
+func (s *Module) FieldsByIdStream() (*krpcgo.Stream[map[string]string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_get_FieldsById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) map[string]string {
+		var value map[string]string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
 // Events - a list of the names of all of the modules events. Events are the
 // clickable buttons visible in the right-click menu of the part.
 //
@@ -33623,6 +36969,73 @@ func (s *Module) EventsStream() (*krpcgo.Stream[[]string], error) {
 	var argBytes []byte
 	request := &types.ProcedureCall{
 		Procedure: "Module_get_Events",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) []string {
+		var value []string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// EventsById - a list of the identifiers of all of the modules events. Events
+// are the clickable buttons visible in the right-click menu of the part.
+//
+// Allowed game scenes: any.
+func (s *Module) EventsById() ([]string, error) {
+	var err error
+	var argBytes []byte
+	var vv []string
+	request := &types.ProcedureCall{
+		Procedure: "Module_get_EventsById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// EventsByIdStream - a list of the identifiers of all of the modules events.
+// Events are the clickable buttons visible in the right-click menu of the part.
+//
+// Allowed game scenes: any.
+func (s *Module) EventsByIdStream() (*krpcgo.Stream[[]string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_get_EventsById",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -33717,6 +37130,75 @@ func (s *Module) ActionsStream() (*krpcgo.Stream[[]string], error) {
 	return stream, nil
 }
 
+// ActionsById - a list of all the identifiers of the modules actions. These are
+// the parts actions that can be assigned to action groups in the in-game
+// editor.
+//
+// Allowed game scenes: any.
+func (s *Module) ActionsById() ([]string, error) {
+	var err error
+	var argBytes []byte
+	var vv []string
+	request := &types.ProcedureCall{
+		Procedure: "Module_get_ActionsById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// ActionsByIdStream - a list of all the identifiers of the modules actions.
+// These are the parts actions that can be assigned to action groups in the
+// in-game editor.
+//
+// Allowed game scenes: any.
+func (s *Module) ActionsByIdStream() (*krpcgo.Stream[[]string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Module_get_ActionsById",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) []string {
+		var value []string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
 // Deploy - deploys the parachute. This has no effect if the parachute has
 // already been deployed.
 //
@@ -33744,7 +37226,7 @@ func (s *Parachute) Deploy() error {
 }
 
 // Arm - deploys the parachute. This has no effect if the parachute has already
-// been armed or deployed. Only applicable to RealChutes parachutes.
+// been armed or deployed.
 //
 // Allowed game scenes: any.
 func (s *Parachute) Arm() error {
@@ -33752,6 +37234,31 @@ func (s *Parachute) Arm() error {
 	var argBytes []byte
 	request := &types.ProcedureCall{
 		Procedure: "Parachute_Arm",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// Cut - cuts the parachute.
+//
+// Allowed game scenes: any.
+func (s *Parachute) Cut() error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Parachute_Cut",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -33865,8 +37372,7 @@ func (s *Parachute) DeployedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// Armed - whether the parachute has been armed or deployed. Only applicable to
-// RealChutes parachutes.
+// Armed - whether the parachute has been armed or deployed.
 //
 // Allowed game scenes: any.
 func (s *Parachute) Armed() (bool, error) {
@@ -33896,8 +37402,7 @@ func (s *Parachute) Armed() (bool, error) {
 	return vv, nil
 }
 
-// ArmedStream - whether the parachute has been armed or deployed. Only
-// applicable to RealChutes parachutes.
+// ArmedStream - whether the parachute has been armed or deployed.
 //
 // Allowed game scenes: any.
 func (s *Parachute) ArmedStream() (*krpcgo.Stream[bool], error) {
@@ -35010,6 +38515,104 @@ func (s *Part) SetTag(value string) error {
 	var argBytes []byte
 	request := &types.ProcedureCall{
 		Procedure: "Part_set_Tag",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// FlagURL - the asset URL for the part's flag.
+//
+// Allowed game scenes: any.
+func (s *Part) FlagURL() (string, error) {
+	var err error
+	var argBytes []byte
+	var vv string
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_FlagURL",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// FlagURLStream - the asset URL for the part's flag.
+//
+// Allowed game scenes: any.
+func (s *Part) FlagURLStream() (*krpcgo.Stream[string], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_FlagURL",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) string {
+		var value string
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetFlagURL - the asset URL for the part's flag.
+//
+// Allowed game scenes: any.
+func (s *Part) SetFlagURL(value string) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Part_set_FlagURL",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -36949,6 +40552,71 @@ func (s *Part) Resources() (*Resources, error) {
 	return &vv, nil
 }
 
+// AvailableSeats - how many open seats the part has.
+//
+// Allowed game scenes: any.
+func (s *Part) AvailableSeats() (uint32, error) {
+	var err error
+	var argBytes []byte
+	var vv uint32
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_AvailableSeats",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// AvailableSeatsStream - how many open seats the part has.
+//
+// Allowed game scenes: any.
+func (s *Part) AvailableSeatsStream() (*krpcgo.Stream[uint32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_AvailableSeats",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) uint32 {
+		var value uint32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
 // Crossfeed - whether this part is crossfeed capable.
 //
 // Allowed game scenes: any.
@@ -37278,7 +40946,7 @@ func (s *Part) ModulesStream() (*krpcgo.Stream[[]*Module], error) {
 	return stream, nil
 }
 
-// Antenna - a <see cref="T:SpaceCenter.Antenna" /> if the part is an antenna,
+// Antenna - an <see cref="T:SpaceCenter.Antenna" /> if the part is an antenna,
 // otherwise nil.
 //
 // Allowed game scenes: any.
@@ -37438,8 +41106,8 @@ func (s *Part) DockingPort() (*DockingPort, error) {
 	return &vv, nil
 }
 
-// ResourceDrain - /// A <see cref="T:SpaceCenter.ResourceDrain" /> if the part
-// is a resource drain, otherwise nil.
+// ResourceDrain - a <see cref="T:SpaceCenter.ResourceDrain" /> if the part is a
+// resource drain, otherwise nil.
 //
 // Allowed game scenes: any.
 func (s *Part) ResourceDrain() (*ResourceDrain, error) {
@@ -37953,38 +41621,6 @@ func (s *Part) ResourceHarvester() (*ResourceHarvester, error) {
 	return &vv, nil
 }
 
-// RoboticController - a <see cref="T:SpaceCenter.RoboticController" /> if the
-// part is a robotic controller, otherwise nil.
-//
-// Allowed game scenes: any.
-func (s *Part) RoboticController() (*RoboticController, error) {
-	var err error
-	var argBytes []byte
-	var vv RoboticController
-	request := &types.ProcedureCall{
-		Procedure: "Part_get_RoboticController",
-		Service:   "SpaceCenter",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	result, err := s.Client.Call(request)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	err = encode.Unmarshal(result.Value, &vv)
-	if err != nil {
-		return &vv, tracerr.Wrap(err)
-	}
-	vv.Client = s.Client
-	return &vv, nil
-}
-
 // Sensor - a <see cref="T:SpaceCenter.Sensor" /> if the part is a sensor,
 // otherwise nil.
 //
@@ -38081,6 +41717,38 @@ func (s *Part) Wheel() (*Wheel, error) {
 	return &vv, nil
 }
 
+// RoboticController - a <see cref="T:SpaceCenter.RoboticController" /> if the
+// part is a robotic controller, otherwise nil.
+//
+// Allowed game scenes: any.
+func (s *Part) RoboticController() (*RoboticController, error) {
+	var err error
+	var argBytes []byte
+	var vv RoboticController
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_RoboticController",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return &vv, tracerr.Wrap(err)
+	}
+	vv.Client = s.Client
+	return &vv, nil
+}
+
 // RoboticHinge - a <see cref="T:SpaceCenter.RoboticHinge" /> if the part is a
 // robotic hinge, otherwise nil.
 //
@@ -38114,7 +41782,7 @@ func (s *Part) RoboticHinge() (*RoboticHinge, error) {
 }
 
 // RoboticPiston - a <see cref="T:SpaceCenter.RoboticPiston" /> if the part is a
-// robotic hinge, otherwise nil.
+// robotic piston, otherwise nil.
 //
 // Allowed game scenes: any.
 func (s *Part) RoboticPiston() (*RoboticPiston, error) {
@@ -38178,7 +41846,7 @@ func (s *Part) RoboticRotation() (*RoboticRotation, error) {
 }
 
 // RoboticRotor - a <see cref="T:SpaceCenter.RoboticRotor" /> if the part is a
-// robotic rotation servo, otherwise nil.
+// robotic rotor, otherwise nil.
 //
 // Allowed game scenes: any.
 func (s *Part) RoboticRotor() (*RoboticRotor, error) {
@@ -38421,7 +42089,7 @@ func (s *Part) CenterOfMassReferenceFrame() (*ReferenceFrame, error) {
 	return &vv, nil
 }
 
-// SetGlow - glow
+// SetGlow - whether the part is glowing.
 //
 // Allowed game scenes: any.
 func (s *Part) SetGlow(value bool) error {
@@ -38452,6 +42120,71 @@ func (s *Part) SetGlow(value bool) error {
 		return tracerr.Wrap(err)
 	}
 	return nil
+}
+
+// AutoStrutMode - auto-strut mode.
+//
+// Allowed game scenes: any.
+func (s *Part) AutoStrutMode() (AutoStrutMode, error) {
+	var err error
+	var argBytes []byte
+	var vv AutoStrutMode
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_AutoStrutMode",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// AutoStrutModeStream - auto-strut mode.
+//
+// Allowed game scenes: any.
+func (s *Part) AutoStrutModeStream() (*krpcgo.Stream[AutoStrutMode], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Part_get_AutoStrutMode",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) AutoStrutMode {
+		var value AutoStrutMode
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
 }
 
 // WithName - a list of parts whose <see cref="M:SpaceCenter.Part.Name" /> is
@@ -40694,7 +44427,7 @@ func (s *Parts) RoboticPistonsStream() (*krpcgo.Stream[[]*RoboticPiston], error)
 	return stream, nil
 }
 
-// RoboticRotations - a list of all robotic pistons in the vessel.
+// RoboticRotations - a list of all robotic rotations in the vessel.
 //
 // Allowed game scenes: any.
 func (s *Parts) RoboticRotations() ([]*RoboticRotation, error) {
@@ -40724,7 +44457,7 @@ func (s *Parts) RoboticRotations() ([]*RoboticRotation, error) {
 	return vv, nil
 }
 
-// RoboticRotationsStream - a list of all robotic pistons in the vessel.
+// RoboticRotationsStream - a list of all robotic rotations in the vessel.
 //
 // Allowed game scenes: any.
 func (s *Parts) RoboticRotationsStream() (*krpcgo.Stream[[]*RoboticRotation], error) {
@@ -42401,6 +46134,79 @@ func (s *RCS) AvailableTorqueStream() (*krpcgo.Stream[types.Tuple2[types.Tuple3[
 	var argBytes []byte
 	request := &types.ProcedureCall{
 		Procedure: "RCS_get_AvailableTorque",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]] {
+		var value types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]]
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// AvailableForce - the available force, in Newtons, that can be produced by
+// this RCS, in the positive and negative x, y and z axes of the vessel. These
+// axes correspond to the coordinate axes of the <see
+// cref="M:SpaceCenter.Vessel.ReferenceFrame" />. Returns zero if RCS is
+// disabled.
+//
+// Allowed game scenes: any.
+func (s *RCS) AvailableForce() (types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]], error) {
+	var err error
+	var argBytes []byte
+	var vv types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]]
+	request := &types.ProcedureCall{
+		Procedure: "RCS_get_AvailableForce",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// AvailableForceStream - the available force, in Newtons, that can be produced
+// by this RCS, in the positive and negative x, y and z axes of the vessel.
+// These axes correspond to the coordinate axes of the <see
+// cref="M:SpaceCenter.Vessel.ReferenceFrame" />. Returns zero if RCS is
+// disabled.
+//
+// Allowed game scenes: any.
+func (s *RCS) AvailableForceStream() (*krpcgo.Stream[types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]]], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "RCS_get_AvailableForce",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -44652,14 +48458,14 @@ func (s *ResourceConverter) OptimumCoreTemperatureStream() (*krpcgo.Stream[float
 	return stream, nil
 }
 
-// SetResourceDrain - enable or Disable draining for the provided resource
+// SetResource - whether the given resource should be drained.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) SetResourceDrain(R *Resource, b bool) error {
+func (s *ResourceDrain) SetResource(resource *Resource, enabled bool) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_SetResourceDrain",
+		Procedure: "ResourceDrain_SetResource",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -44670,7 +48476,7 @@ func (s *ResourceDrain) SetResourceDrain(R *Resource, b bool) error {
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(R)
+	argBytes, err = encode.Marshal(resource)
 	if err != nil {
 		return tracerr.Wrap(err)
 	}
@@ -44678,7 +48484,7 @@ func (s *ResourceDrain) SetResourceDrain(R *Resource, b bool) error {
 		Position: uint32(0x1),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(b)
+	argBytes, err = encode.Marshal(enabled)
 	if err != nil {
 		return tracerr.Wrap(err)
 	}
@@ -44693,16 +48499,15 @@ func (s *ResourceDrain) SetResourceDrain(R *Resource, b bool) error {
 	return nil
 }
 
-// CheckResourceDrain - checks whether the provided resource is selected for
-// draining
+// CheckResource - whether the provided resource is enabled for draining.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) CheckResourceDrain(R *Resource) (bool, error) {
+func (s *ResourceDrain) CheckResource(resource *Resource) (bool, error) {
 	var err error
 	var argBytes []byte
 	var vv bool
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_CheckResourceDrain",
+		Procedure: "ResourceDrain_CheckResource",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -44713,7 +48518,7 @@ func (s *ResourceDrain) CheckResourceDrain(R *Resource) (bool, error) {
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(R)
+	argBytes, err = encode.Marshal(resource)
 	if err != nil {
 		return vv, tracerr.Wrap(err)
 	}
@@ -44732,15 +48537,14 @@ func (s *ResourceDrain) CheckResourceDrain(R *Resource) (bool, error) {
 	return vv, nil
 }
 
-// CheckResourceDrainStream - checks whether the provided resource is selected
-// for draining
+// CheckResourceStream - whether the provided resource is enabled for draining.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) CheckResourceDrainStream(R *Resource) (*krpcgo.Stream[bool], error) {
+func (s *ResourceDrain) CheckResourceStream(resource *Resource) (*krpcgo.Stream[bool], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_CheckResourceDrain",
+		Procedure: "ResourceDrain_CheckResource",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -44751,7 +48555,7 @@ func (s *ResourceDrain) CheckResourceDrainStream(R *Resource) (*krpcgo.Stream[bo
 		Position: uint32(0x0),
 		Value:    argBytes,
 	})
-	argBytes, err = encode.Marshal(R)
+	argBytes, err = encode.Marshal(resource)
 	if err != nil {
 		return nil, tracerr.Wrap(err)
 	}
@@ -44776,7 +48580,7 @@ func (s *ResourceDrain) CheckResourceDrainStream(R *Resource) (*krpcgo.Stream[bo
 	return stream, nil
 }
 
-// Start - activates resource drain for all enabled parts
+// Start - activates resource draining for all enabled parts.
 //
 // Allowed game scenes: any.
 func (s *ResourceDrain) Start() error {
@@ -44801,7 +48605,7 @@ func (s *ResourceDrain) Start() error {
 	return nil
 }
 
-// Stop - turns off resource drain
+// Stop - turns off resource draining.
 //
 // Allowed game scenes: any.
 func (s *ResourceDrain) Stop() error {
@@ -44826,7 +48630,7 @@ func (s *ResourceDrain) Stop() error {
 	return nil
 }
 
-// Part - the part object for this resource drain
+// Part - the part object for this resource drain.
 //
 // Allowed game scenes: any.
 func (s *ResourceDrain) Part() (*Part, error) {
@@ -44857,7 +48661,7 @@ func (s *ResourceDrain) Part() (*Part, error) {
 	return &vv, nil
 }
 
-// AvailableResources - returns list of available resources
+// AvailableResources - list of available resources.
 //
 // Allowed game scenes: any.
 func (s *ResourceDrain) AvailableResources() ([]*Resource, error) {
@@ -44887,7 +48691,7 @@ func (s *ResourceDrain) AvailableResources() ([]*Resource, error) {
 	return vv, nil
 }
 
-// AvailableResourcesStream - returns list of available resources
+// AvailableResourcesStream - list of available resources.
 //
 // Allowed game scenes: any.
 func (s *ResourceDrain) AvailableResourcesStream() (*krpcgo.Stream[[]*Resource], error) {
@@ -44922,13 +48726,13 @@ func (s *ResourceDrain) AvailableResourcesStream() (*krpcgo.Stream[[]*Resource],
 	return stream, nil
 }
 
-// DrainMode - sets drain mode to part or vessel-wide
+// DrainMode - the drain mode.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) DrainMode() (DrainModes, error) {
+func (s *ResourceDrain) DrainMode() (DrainMode, error) {
 	var err error
 	var argBytes []byte
-	var vv DrainModes
+	var vv DrainMode
 	request := &types.ProcedureCall{
 		Procedure: "ResourceDrain_get_DrainMode",
 		Service:   "SpaceCenter",
@@ -44952,10 +48756,10 @@ func (s *ResourceDrain) DrainMode() (DrainModes, error) {
 	return vv, nil
 }
 
-// DrainModeStream - sets drain mode to part or vessel-wide
+// DrainModeStream - the drain mode.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) DrainModeStream() (*krpcgo.Stream[DrainModes], error) {
+func (s *ResourceDrain) DrainModeStream() (*krpcgo.Stream[DrainMode], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
@@ -44976,8 +48780,8 @@ func (s *ResourceDrain) DrainModeStream() (*krpcgo.Stream[DrainModes], error) {
 		return nil, tracerr.Wrap(err)
 	}
 	rawStream := s.Client.GetStream(st.Id)
-	stream := krpcgo.MapStream(rawStream, func(b []byte) DrainModes {
-		var value DrainModes
+	stream := krpcgo.MapStream(rawStream, func(b []byte) DrainMode {
+		var value DrainMode
 		encode.Unmarshal(b, &value)
 		return value
 	})
@@ -44987,10 +48791,10 @@ func (s *ResourceDrain) DrainModeStream() (*krpcgo.Stream[DrainModes], error) {
 	return stream, nil
 }
 
-// SetDrainMode - sets drain mode to part or vessel-wide
+// SetDrainMode - the drain mode.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) SetDrainMode(value DrainModes) error {
+func (s *ResourceDrain) SetDrainMode(value DrainMode) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
@@ -45020,15 +48824,15 @@ func (s *ResourceDrain) SetDrainMode(value DrainModes) error {
 	return nil
 }
 
-// MaxDrainRate - maximum possible rate of draining.
+// MaxRate - maximum possible drain rate.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) MaxDrainRate() (float32, error) {
+func (s *ResourceDrain) MaxRate() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_get_MaxDrainRate",
+		Procedure: "ResourceDrain_get_MaxRate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45050,14 +48854,14 @@ func (s *ResourceDrain) MaxDrainRate() (float32, error) {
 	return vv, nil
 }
 
-// MaxDrainRateStream - maximum possible rate of draining.
+// MaxRateStream - maximum possible drain rate.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) MaxDrainRateStream() (*krpcgo.Stream[float32], error) {
+func (s *ResourceDrain) MaxRateStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_get_MaxDrainRate",
+		Procedure: "ResourceDrain_get_MaxRate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45085,15 +48889,15 @@ func (s *ResourceDrain) MaxDrainRateStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// MinDrainRate - minimum possible rate of draining
+// MinRate - minimum possible drain rate
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) MinDrainRate() (float32, error) {
+func (s *ResourceDrain) MinRate() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_get_MinDrainRate",
+		Procedure: "ResourceDrain_get_MinRate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45115,14 +48919,14 @@ func (s *ResourceDrain) MinDrainRate() (float32, error) {
 	return vv, nil
 }
 
-// MinDrainRateStream - minimum possible rate of draining
+// MinRateStream - minimum possible drain rate
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) MinDrainRateStream() (*krpcgo.Stream[float32], error) {
+func (s *ResourceDrain) MinRateStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_get_MinDrainRate",
+		Procedure: "ResourceDrain_get_MinRate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45150,15 +48954,15 @@ func (s *ResourceDrain) MinDrainRateStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// DrainRate - current rate of draining
+// Rate - current drain rate.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) DrainRate() (float32, error) {
+func (s *ResourceDrain) Rate() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_get_DrainRate",
+		Procedure: "ResourceDrain_get_Rate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45180,14 +48984,14 @@ func (s *ResourceDrain) DrainRate() (float32, error) {
 	return vv, nil
 }
 
-// DrainRateStream - current rate of draining
+// RateStream - current drain rate.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) DrainRateStream() (*krpcgo.Stream[float32], error) {
+func (s *ResourceDrain) RateStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_get_DrainRate",
+		Procedure: "ResourceDrain_get_Rate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45215,14 +49019,14 @@ func (s *ResourceDrain) DrainRateStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetDrainRate - current rate of draining
+// SetRate - current drain rate.
 //
 // Allowed game scenes: any.
-func (s *ResourceDrain) SetDrainRate(value float32) error {
+func (s *ResourceDrain) SetRate(value float32) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "ResourceDrain_set_DrainRate",
+		Procedure: "ResourceDrain_set_Rate",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45806,7 +49610,7 @@ func (s *ResourceHarvester) OptimumCoreTemperatureStream() (*krpcgo.Stream[float
 	return stream, nil
 }
 
-// HasPart - whether the controller any axisfield from the part
+// HasPart - whether the controller has a part.
 //
 // Allowed game scenes: any.
 func (s *RoboticController) HasPart(part *Part) (bool, error) {
@@ -45844,7 +49648,7 @@ func (s *RoboticController) HasPart(part *Part) (bool, error) {
 	return vv, nil
 }
 
-// HasPartStream - whether the controller any axisfield from the part
+// HasPartStream - whether the controller has a part.
 //
 // Allowed game scenes: any.
 func (s *RoboticController) HasPartStream(part *Part) (*krpcgo.Stream[bool], error) {
@@ -45887,15 +49691,15 @@ func (s *RoboticController) HasPartStream(part *Part) (*krpcgo.Stream[bool], err
 	return stream, nil
 }
 
-// ListAxes - list the axes for the controller.
+// Axes - the axes for the controller.
 //
 // Allowed game scenes: any.
-func (s *RoboticController) ListAxes() ([][]string, error) {
+func (s *RoboticController) Axes() ([][]string, error) {
 	var err error
 	var argBytes []byte
 	var vv [][]string
 	request := &types.ProcedureCall{
-		Procedure: "RoboticController_ListAxes",
+		Procedure: "RoboticController_Axes",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45917,14 +49721,14 @@ func (s *RoboticController) ListAxes() ([][]string, error) {
 	return vv, nil
 }
 
-// ListAxesStream - list the axes for the controller.
+// AxesStream - the axes for the controller.
 //
 // Allowed game scenes: any.
-func (s *RoboticController) ListAxesStream() (*krpcgo.Stream[[][]string], error) {
+func (s *RoboticController) AxesStream() (*krpcgo.Stream[[][]string], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticController_ListAxes",
+		Procedure: "RoboticController_Axes",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -45952,7 +49756,7 @@ func (s *RoboticController) ListAxesStream() (*krpcgo.Stream[[][]string], error)
 	return stream, nil
 }
 
-// AddAxis - add an axis to the controller
+// AddAxis - add an axis to the controller.
 //
 // Allowed game scenes: any.
 func (s *RoboticController) AddAxis(module *Module, fieldName string) (bool, error) {
@@ -45998,7 +49802,7 @@ func (s *RoboticController) AddAxis(module *Module, fieldName string) (bool, err
 	return vv, nil
 }
 
-// AddAxisStream - add an axis to the controller
+// AddAxisStream - add an axis to the controller.
 //
 // Allowed game scenes: any.
 func (s *RoboticController) AddAxisStream(module *Module, fieldName string) (*krpcgo.Stream[bool], error) {
@@ -46049,15 +49853,15 @@ func (s *RoboticController) AddAxisStream(module *Module, fieldName string) (*kr
 	return stream, nil
 }
 
-// AddKey - add key frame value for controller axis.
+// AddKeyFrame - add key frame value for controller axis.
 //
 // Allowed game scenes: any.
-func (s *RoboticController) AddKey(module *Module, fieldName string, time float32, value float32) (bool, error) {
+func (s *RoboticController) AddKeyFrame(module *Module, fieldName string, time float32, value float32) (bool, error) {
 	var err error
 	var argBytes []byte
 	var vv bool
 	request := &types.ProcedureCall{
-		Procedure: "RoboticController_AddKey",
+		Procedure: "RoboticController_AddKeyFrame",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46111,14 +49915,14 @@ func (s *RoboticController) AddKey(module *Module, fieldName string, time float3
 	return vv, nil
 }
 
-// AddKeyStream - add key frame value for controller axis.
+// AddKeyFrameStream - add key frame value for controller axis.
 //
 // Allowed game scenes: any.
-func (s *RoboticController) AddKeyStream(module *Module, fieldName string, time float32, value float32) (*krpcgo.Stream[bool], error) {
+func (s *RoboticController) AddKeyFrameStream(module *Module, fieldName string, time float32, value float32) (*krpcgo.Stream[bool], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticController_AddKey",
+		Procedure: "RoboticController_AddKeyFrame",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46275,7 +50079,7 @@ func (s *RoboticController) ClearAxisStream(module *Module, fieldName string) (*
 	return stream, nil
 }
 
-// Part - the part object for this antenna.
+// Part - the part object for this controller.
 //
 // Allowed game scenes: any.
 func (s *RoboticController) Part() (*Part, error) {
@@ -46306,14 +50110,14 @@ func (s *RoboticController) Part() (*Part, error) {
 	return &vv, nil
 }
 
-// Home - returns Hinge to Build Angle Position
+// MoveHome - move hinge to it's built position.
 //
 // Allowed game scenes: any.
-func (s *RoboticHinge) Home() error {
+func (s *RoboticHinge) MoveHome() error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticHinge_Home",
+		Procedure: "RoboticHinge_MoveHome",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46362,7 +50166,7 @@ func (s *RoboticHinge) Part() (*Part, error) {
 	return &vv, nil
 }
 
-// TargetAngle - target Angle for Robotic Hinge
+// TargetAngle - target angle.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) TargetAngle() (float32, error) {
@@ -46392,7 +50196,7 @@ func (s *RoboticHinge) TargetAngle() (float32, error) {
 	return vv, nil
 }
 
-// TargetAngleStream - target Angle for Robotic Hinge
+// TargetAngleStream - target angle.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) TargetAngleStream() (*krpcgo.Stream[float32], error) {
@@ -46427,7 +50231,7 @@ func (s *RoboticHinge) TargetAngleStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetTargetAngle - target Angle for Robotic Hinge
+// SetTargetAngle - target angle.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) SetTargetAngle(value float32) error {
@@ -46460,7 +50264,7 @@ func (s *RoboticHinge) SetTargetAngle(value float32) error {
 	return nil
 }
 
-// CurrentAngle - current Angle for Robotic Hinge
+// CurrentAngle - current angle.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) CurrentAngle() (float32, error) {
@@ -46490,7 +50294,7 @@ func (s *RoboticHinge) CurrentAngle() (float32, error) {
 	return vv, nil
 }
 
-// CurrentAngleStream - current Angle for Robotic Hinge
+// CurrentAngleStream - current angle.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) CurrentAngleStream() (*krpcgo.Stream[float32], error) {
@@ -46525,7 +50329,7 @@ func (s *RoboticHinge) CurrentAngleStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// Rate - target Movement Rate in Degrees/s
+// Rate - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) Rate() (float32, error) {
@@ -46555,7 +50359,7 @@ func (s *RoboticHinge) Rate() (float32, error) {
 	return vv, nil
 }
 
-// RateStream - target Movement RateStream in Degrees/s
+// RateStream - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) RateStream() (*krpcgo.Stream[float32], error) {
@@ -46590,7 +50394,7 @@ func (s *RoboticHinge) RateStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetRate - target Movement Rate in Degrees/s
+// SetRate - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) SetRate(value float32) error {
@@ -46623,7 +50427,7 @@ func (s *RoboticHinge) SetRate(value float32) error {
 	return nil
 }
 
-// Damping - damping Percentage&gt;
+// Damping - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) Damping() (float32, error) {
@@ -46653,7 +50457,7 @@ func (s *RoboticHinge) Damping() (float32, error) {
 	return vv, nil
 }
 
-// DampingStream - damping Percentage&gt;
+// DampingStream - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) DampingStream() (*krpcgo.Stream[float32], error) {
@@ -46688,7 +50492,7 @@ func (s *RoboticHinge) DampingStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetDamping - damping Percentage&gt;
+// SetDamping - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) SetDamping(value float32) error {
@@ -46721,15 +50525,15 @@ func (s *RoboticHinge) SetDamping(value float32) error {
 	return nil
 }
 
-// HingeLocked - lock Movement
+// Locked - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticHinge) HingeLocked() (bool, error) {
+func (s *RoboticHinge) Locked() (bool, error) {
 	var err error
 	var argBytes []byte
 	var vv bool
 	request := &types.ProcedureCall{
-		Procedure: "RoboticHinge_get_HingeLocked",
+		Procedure: "RoboticHinge_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46751,14 +50555,14 @@ func (s *RoboticHinge) HingeLocked() (bool, error) {
 	return vv, nil
 }
 
-// HingeLockedStream - lock Movement
+// LockedStream - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticHinge) HingeLockedStream() (*krpcgo.Stream[bool], error) {
+func (s *RoboticHinge) LockedStream() (*krpcgo.Stream[bool], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticHinge_get_HingeLocked",
+		Procedure: "RoboticHinge_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46786,14 +50590,14 @@ func (s *RoboticHinge) HingeLockedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetHingeLocked - lock Movement
+// SetLocked - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticHinge) SetHingeLocked(value bool) error {
+func (s *RoboticHinge) SetLocked(value bool) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticHinge_set_HingeLocked",
+		Procedure: "RoboticHinge_set_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46819,7 +50623,7 @@ func (s *RoboticHinge) SetHingeLocked(value bool) error {
 	return nil
 }
 
-// MotorEngaged - engage/Disengage Motor
+// MotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) MotorEngaged() (bool, error) {
@@ -46849,7 +50653,7 @@ func (s *RoboticHinge) MotorEngaged() (bool, error) {
 	return vv, nil
 }
 
-// MotorEngagedStream - engage/Disengage Motor
+// MotorEngagedStream - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
@@ -46884,7 +50688,7 @@ func (s *RoboticHinge) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetMotorEngaged - engage/Disengage Motor
+// SetMotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticHinge) SetMotorEngaged(value bool) error {
@@ -46917,14 +50721,14 @@ func (s *RoboticHinge) SetMotorEngaged(value bool) error {
 	return nil
 }
 
-// Home - returns Piston to VAB Position
+// MoveHome - move piston to it's built position.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) Home() error {
+func (s *RoboticPiston) MoveHome() error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_Home",
+		Procedure: "RoboticPiston_MoveHome",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -46973,15 +50777,15 @@ func (s *RoboticPiston) Part() (*Part, error) {
 	return &vv, nil
 }
 
-// TargetPosition - target Extension for robotic piston.
+// TargetExtension - target extension of the piston.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) TargetPosition() (float32, error) {
+func (s *RoboticPiston) TargetExtension() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_get_TargetPosition",
+		Procedure: "RoboticPiston_get_TargetExtension",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47003,14 +50807,14 @@ func (s *RoboticPiston) TargetPosition() (float32, error) {
 	return vv, nil
 }
 
-// TargetPositionStream - target Extension for robotic piston.
+// TargetExtensionStream - target extension of the piston.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) TargetPositionStream() (*krpcgo.Stream[float32], error) {
+func (s *RoboticPiston) TargetExtensionStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_get_TargetPosition",
+		Procedure: "RoboticPiston_get_TargetExtension",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47038,14 +50842,14 @@ func (s *RoboticPiston) TargetPositionStream() (*krpcgo.Stream[float32], error) 
 	return stream, nil
 }
 
-// SetTargetPosition - target Extension for robotic piston.
+// SetTargetExtension - target extension of the piston.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) SetTargetPosition(value float32) error {
+func (s *RoboticPiston) SetTargetExtension(value float32) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_set_TargetPosition",
+		Procedure: "RoboticPiston_set_TargetExtension",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47071,15 +50875,15 @@ func (s *RoboticPiston) SetTargetPosition(value float32) error {
 	return nil
 }
 
-// CurrentPosition - current Extension of piston
+// CurrentExtension - current extension of the piston.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) CurrentPosition() (float32, error) {
+func (s *RoboticPiston) CurrentExtension() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_get_CurrentPosition",
+		Procedure: "RoboticPiston_get_CurrentExtension",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47101,14 +50905,14 @@ func (s *RoboticPiston) CurrentPosition() (float32, error) {
 	return vv, nil
 }
 
-// CurrentPositionStream - current Extension of piston
+// CurrentExtensionStream - current extension of the piston.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) CurrentPositionStream() (*krpcgo.Stream[float32], error) {
+func (s *RoboticPiston) CurrentExtensionStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_get_CurrentPosition",
+		Procedure: "RoboticPiston_get_CurrentExtension",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47136,7 +50940,7 @@ func (s *RoboticPiston) CurrentPositionStream() (*krpcgo.Stream[float32], error)
 	return stream, nil
 }
 
-// Rate - target Movement Rate in Degrees/s
+// Rate - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) Rate() (float32, error) {
@@ -47166,7 +50970,7 @@ func (s *RoboticPiston) Rate() (float32, error) {
 	return vv, nil
 }
 
-// RateStream - target Movement RateStream in Degrees/s
+// RateStream - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) RateStream() (*krpcgo.Stream[float32], error) {
@@ -47201,7 +51005,7 @@ func (s *RoboticPiston) RateStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetRate - target Movement Rate in Degrees/s
+// SetRate - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) SetRate(value float32) error {
@@ -47234,7 +51038,7 @@ func (s *RoboticPiston) SetRate(value float32) error {
 	return nil
 }
 
-// Damping - damping Percentage&gt;
+// Damping - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) Damping() (float32, error) {
@@ -47264,7 +51068,7 @@ func (s *RoboticPiston) Damping() (float32, error) {
 	return vv, nil
 }
 
-// DampingStream - damping Percentage&gt;
+// DampingStream - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) DampingStream() (*krpcgo.Stream[float32], error) {
@@ -47299,7 +51103,7 @@ func (s *RoboticPiston) DampingStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetDamping - damping Percentage&gt;
+// SetDamping - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) SetDamping(value float32) error {
@@ -47332,15 +51136,15 @@ func (s *RoboticPiston) SetDamping(value float32) error {
 	return nil
 }
 
-// PistonLocked - lock Movement
+// Locked - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) PistonLocked() (bool, error) {
+func (s *RoboticPiston) Locked() (bool, error) {
 	var err error
 	var argBytes []byte
 	var vv bool
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_get_PistonLocked",
+		Procedure: "RoboticPiston_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47362,14 +51166,14 @@ func (s *RoboticPiston) PistonLocked() (bool, error) {
 	return vv, nil
 }
 
-// PistonLockedStream - lock Movement
+// LockedStream - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) PistonLockedStream() (*krpcgo.Stream[bool], error) {
+func (s *RoboticPiston) LockedStream() (*krpcgo.Stream[bool], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_get_PistonLocked",
+		Procedure: "RoboticPiston_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47397,14 +51201,14 @@ func (s *RoboticPiston) PistonLockedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetPistonLocked - lock Movement
+// SetLocked - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticPiston) SetPistonLocked(value bool) error {
+func (s *RoboticPiston) SetLocked(value bool) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticPiston_set_PistonLocked",
+		Procedure: "RoboticPiston_set_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47430,7 +51234,7 @@ func (s *RoboticPiston) SetPistonLocked(value bool) error {
 	return nil
 }
 
-// MotorEngaged - engage/Disengage Motor
+// MotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) MotorEngaged() (bool, error) {
@@ -47460,7 +51264,7 @@ func (s *RoboticPiston) MotorEngaged() (bool, error) {
 	return vv, nil
 }
 
-// MotorEngagedStream - engage/Disengage Motor
+// MotorEngagedStream - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
@@ -47495,7 +51299,7 @@ func (s *RoboticPiston) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetMotorEngaged - engage/Disengage Motor
+// SetMotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticPiston) SetMotorEngaged(value bool) error {
@@ -47528,14 +51332,14 @@ func (s *RoboticPiston) SetMotorEngaged(value bool) error {
 	return nil
 }
 
-// Home - returns Servo to Build Angle Position
+// MoveHome - move rotation servo to it's built position.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) Home() error {
+func (s *RoboticRotation) MoveHome() error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_Home",
+		Procedure: "RoboticRotation_MoveHome",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47553,7 +51357,7 @@ func (s *RoboticRotation) Home() error {
 	return nil
 }
 
-// Part - the part object for this robotic servo.
+// Part - the part object for this robotic rotation servo.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) Part() (*Part, error) {
@@ -47584,15 +51388,15 @@ func (s *RoboticRotation) Part() (*Part, error) {
 	return &vv, nil
 }
 
-// TargetPosition - target Angle for Robotic Servo
+// TargetAngle - target angle.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) TargetPosition() (float32, error) {
+func (s *RoboticRotation) TargetAngle() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_get_TargetPosition",
+		Procedure: "RoboticRotation_get_TargetAngle",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47614,14 +51418,14 @@ func (s *RoboticRotation) TargetPosition() (float32, error) {
 	return vv, nil
 }
 
-// TargetPositionStream - target Angle for Robotic Servo
+// TargetAngleStream - target angle.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) TargetPositionStream() (*krpcgo.Stream[float32], error) {
+func (s *RoboticRotation) TargetAngleStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_get_TargetPosition",
+		Procedure: "RoboticRotation_get_TargetAngle",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47649,14 +51453,14 @@ func (s *RoboticRotation) TargetPositionStream() (*krpcgo.Stream[float32], error
 	return stream, nil
 }
 
-// SetTargetPosition - target Angle for Robotic Servo
+// SetTargetAngle - target angle.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) SetTargetPosition(value float32) error {
+func (s *RoboticRotation) SetTargetAngle(value float32) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_set_TargetPosition",
+		Procedure: "RoboticRotation_set_TargetAngle",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47682,15 +51486,15 @@ func (s *RoboticRotation) SetTargetPosition(value float32) error {
 	return nil
 }
 
-// CurrentPosition - current Angle for Robotic Hinge
+// CurrentAngle - current angle.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) CurrentPosition() (float32, error) {
+func (s *RoboticRotation) CurrentAngle() (float32, error) {
 	var err error
 	var argBytes []byte
 	var vv float32
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_get_CurrentPosition",
+		Procedure: "RoboticRotation_get_CurrentAngle",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47712,14 +51516,14 @@ func (s *RoboticRotation) CurrentPosition() (float32, error) {
 	return vv, nil
 }
 
-// CurrentPositionStream - current Angle for Robotic Hinge
+// CurrentAngleStream - current angle.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) CurrentPositionStream() (*krpcgo.Stream[float32], error) {
+func (s *RoboticRotation) CurrentAngleStream() (*krpcgo.Stream[float32], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_get_CurrentPosition",
+		Procedure: "RoboticRotation_get_CurrentAngle",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47747,7 +51551,7 @@ func (s *RoboticRotation) CurrentPositionStream() (*krpcgo.Stream[float32], erro
 	return stream, nil
 }
 
-// Rate - target Movement Rate in Degrees/s
+// Rate - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) Rate() (float32, error) {
@@ -47777,7 +51581,7 @@ func (s *RoboticRotation) Rate() (float32, error) {
 	return vv, nil
 }
 
-// RateStream - target Movement RateStream in Degrees/s
+// RateStream - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) RateStream() (*krpcgo.Stream[float32], error) {
@@ -47812,7 +51616,7 @@ func (s *RoboticRotation) RateStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetRate - target Movement Rate in Degrees/s
+// SetRate - target movement rate in degrees per second.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) SetRate(value float32) error {
@@ -47845,7 +51649,7 @@ func (s *RoboticRotation) SetRate(value float32) error {
 	return nil
 }
 
-// Damping - damping Percentage&gt;
+// Damping - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) Damping() (float32, error) {
@@ -47875,7 +51679,7 @@ func (s *RoboticRotation) Damping() (float32, error) {
 	return vv, nil
 }
 
-// DampingStream - damping Percentage&gt;
+// DampingStream - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) DampingStream() (*krpcgo.Stream[float32], error) {
@@ -47910,7 +51714,7 @@ func (s *RoboticRotation) DampingStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetDamping - damping Percentage&gt;
+// SetDamping - damping percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) SetDamping(value float32) error {
@@ -47943,15 +51747,15 @@ func (s *RoboticRotation) SetDamping(value float32) error {
 	return nil
 }
 
-// RotationLocked - lock Movement
+// Locked - lock Movement
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) RotationLocked() (bool, error) {
+func (s *RoboticRotation) Locked() (bool, error) {
 	var err error
 	var argBytes []byte
 	var vv bool
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_get_RotationLocked",
+		Procedure: "RoboticRotation_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -47973,14 +51777,14 @@ func (s *RoboticRotation) RotationLocked() (bool, error) {
 	return vv, nil
 }
 
-// RotationLockedStream - lock Movement
+// LockedStream - lock Movement
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) RotationLockedStream() (*krpcgo.Stream[bool], error) {
+func (s *RoboticRotation) LockedStream() (*krpcgo.Stream[bool], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_get_RotationLocked",
+		Procedure: "RoboticRotation_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -48008,14 +51812,14 @@ func (s *RoboticRotation) RotationLockedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetRotationLocked - lock Movement
+// SetLocked - lock Movement
 //
 // Allowed game scenes: any.
-func (s *RoboticRotation) SetRotationLocked(value bool) error {
+func (s *RoboticRotation) SetLocked(value bool) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotation_set_RotationLocked",
+		Procedure: "RoboticRotation_set_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -48041,7 +51845,7 @@ func (s *RoboticRotation) SetRotationLocked(value bool) error {
 	return nil
 }
 
-// MotorEngaged - engage/Disengage Motor
+// MotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) MotorEngaged() (bool, error) {
@@ -48071,7 +51875,7 @@ func (s *RoboticRotation) MotorEngaged() (bool, error) {
 	return vv, nil
 }
 
-// MotorEngagedStream - engage/Disengage Motor
+// MotorEngagedStream - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
@@ -48106,7 +51910,7 @@ func (s *RoboticRotation) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetMotorEngaged - engage/Disengage Motor
+// SetMotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotation) SetMotorEngaged(value bool) error {
@@ -48170,7 +51974,7 @@ func (s *RoboticRotor) Part() (*Part, error) {
 	return &vv, nil
 }
 
-// TargetRPM - target RPM for Robotic Rotor
+// TargetRPM - target RPM.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) TargetRPM() (float32, error) {
@@ -48200,7 +52004,7 @@ func (s *RoboticRotor) TargetRPM() (float32, error) {
 	return vv, nil
 }
 
-// TargetRPMStream - target RPM for Robotic Rotor
+// TargetRPMStream - target RPM.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) TargetRPMStream() (*krpcgo.Stream[float32], error) {
@@ -48235,7 +52039,7 @@ func (s *RoboticRotor) TargetRPMStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetTargetRPM - target RPM for Robotic Rotor
+// SetTargetRPM - target RPM.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) SetTargetRPM(value float32) error {
@@ -48268,7 +52072,7 @@ func (s *RoboticRotor) SetTargetRPM(value float32) error {
 	return nil
 }
 
-// CurrentRPM - current RPM for Robotic Hinge
+// CurrentRPM - current RPM.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) CurrentRPM() (float32, error) {
@@ -48298,7 +52102,7 @@ func (s *RoboticRotor) CurrentRPM() (float32, error) {
 	return vv, nil
 }
 
-// CurrentRPMStream - current RPM for Robotic Hinge
+// CurrentRPMStream - current RPM.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) CurrentRPMStream() (*krpcgo.Stream[float32], error) {
@@ -48333,7 +52137,7 @@ func (s *RoboticRotor) CurrentRPMStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// Inverted - invert Rotor Direction?
+// Inverted - whether the rotor direction is inverted.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) Inverted() (bool, error) {
@@ -48363,7 +52167,7 @@ func (s *RoboticRotor) Inverted() (bool, error) {
 	return vv, nil
 }
 
-// InvertedStream - invert Rotor Direction?
+// InvertedStream - whether the rotor direction is inverted.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) InvertedStream() (*krpcgo.Stream[bool], error) {
@@ -48398,7 +52202,7 @@ func (s *RoboticRotor) InvertedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetInverted - invert Rotor Direction?
+// SetInverted - whether the rotor direction is inverted.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) SetInverted(value bool) error {
@@ -48431,15 +52235,15 @@ func (s *RoboticRotor) SetInverted(value bool) error {
 	return nil
 }
 
-// RotationLocked - lock Movement
+// Locked - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotor) RotationLocked() (bool, error) {
+func (s *RoboticRotor) Locked() (bool, error) {
 	var err error
 	var argBytes []byte
 	var vv bool
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotor_get_RotationLocked",
+		Procedure: "RoboticRotor_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -48461,14 +52265,14 @@ func (s *RoboticRotor) RotationLocked() (bool, error) {
 	return vv, nil
 }
 
-// RotationLockedStream - lock Movement
+// LockedStream - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotor) RotationLockedStream() (*krpcgo.Stream[bool], error) {
+func (s *RoboticRotor) LockedStream() (*krpcgo.Stream[bool], error) {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotor_get_RotationLocked",
+		Procedure: "RoboticRotor_get_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -48496,14 +52300,14 @@ func (s *RoboticRotor) RotationLockedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetRotationLocked - lock Movement
+// SetLocked - lock movement.
 //
 // Allowed game scenes: any.
-func (s *RoboticRotor) SetRotationLocked(value bool) error {
+func (s *RoboticRotor) SetLocked(value bool) error {
 	var err error
 	var argBytes []byte
 	request := &types.ProcedureCall{
-		Procedure: "RoboticRotor_set_RotationLocked",
+		Procedure: "RoboticRotor_set_Locked",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -48529,7 +52333,7 @@ func (s *RoboticRotor) SetRotationLocked(value bool) error {
 	return nil
 }
 
-// MotorEngaged - engage/Disengage Motor
+// MotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) MotorEngaged() (bool, error) {
@@ -48559,7 +52363,7 @@ func (s *RoboticRotor) MotorEngaged() (bool, error) {
 	return vv, nil
 }
 
-// MotorEngagedStream - engage/Disengage Motor
+// MotorEngagedStream - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
@@ -48594,7 +52398,7 @@ func (s *RoboticRotor) MotorEngagedStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// SetMotorEngaged - engage/Disengage Motor
+// SetMotorEngaged - whether the motor is engaged.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) SetMotorEngaged(value bool) error {
@@ -48627,7 +52431,7 @@ func (s *RoboticRotor) SetMotorEngaged(value bool) error {
 	return nil
 }
 
-// TorqueLimit - torque Limit Percentage
+// TorqueLimit - torque limit percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) TorqueLimit() (float32, error) {
@@ -48657,7 +52461,7 @@ func (s *RoboticRotor) TorqueLimit() (float32, error) {
 	return vv, nil
 }
 
-// TorqueLimitStream - torque Limit Percentage
+// TorqueLimitStream - torque limit percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) TorqueLimitStream() (*krpcgo.Stream[float32], error) {
@@ -48692,7 +52496,7 @@ func (s *RoboticRotor) TorqueLimitStream() (*krpcgo.Stream[float32], error) {
 	return stream, nil
 }
 
-// SetTorqueLimit - torque Limit Percentage
+// SetTorqueLimit - torque limit percentage.
 //
 // Allowed game scenes: any.
 func (s *RoboticRotor) SetTorqueLimit(value float32) error {
@@ -52317,6 +56121,202 @@ func (s *Wheel) SetSteeringInverted(value bool) error {
 	return nil
 }
 
+// SteeringAngleLimit - the steering angle limit.
+//
+// Allowed game scenes: any.
+func (s *Wheel) SteeringAngleLimit() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Wheel_get_SteeringAngleLimit",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// SteeringAngleLimitStream - the steering angle limit.
+//
+// Allowed game scenes: any.
+func (s *Wheel) SteeringAngleLimitStream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Wheel_get_SteeringAngleLimit",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetSteeringAngleLimit - the steering angle limit.
+//
+// Allowed game scenes: any.
+func (s *Wheel) SetSteeringAngleLimit(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Wheel_set_SteeringAngleLimit",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
+// SteeringResponseTime - steering response time.
+//
+// Allowed game scenes: any.
+func (s *Wheel) SteeringResponseTime() (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Wheel_get_SteeringResponseTime",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// SteeringResponseTimeStream - steering response time.
+//
+// Allowed game scenes: any.
+func (s *Wheel) SteeringResponseTimeStream() (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Wheel_get_SteeringResponseTime",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SetSteeringResponseTime - steering response time.
+//
+// Allowed game scenes: any.
+func (s *Wheel) SetSteeringResponseTime(value float32) error {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Wheel_set_SteeringResponseTime",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(value)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	_, err = s.Client.Call(request)
+	if err != nil {
+		return tracerr.Wrap(err)
+	}
+	return nil
+}
+
 // HasSuspension - whether the wheel has suspension.
 //
 // Allowed game scenes: any.
@@ -54535,6 +58535,267 @@ func (s *Vessel) ResourcesInDecoupleStage(stage int32, cumulative bool) (*Resour
 	}
 	vv.Client = s.Client
 	return &vv, nil
+}
+
+// AvailableThrustAt - gets the total available thrust that can be produced by
+// the vessel's active engines, in Newtons. This is computed by summing <see
+// cref="M:SpaceCenter.Engine.AvailableThrustAt" /> for every active engine in
+// the vessel. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Vessel) AvailableThrustAt(pressure float64) (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_AvailableThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// AvailableThrustAtStream - gets the total available thrust that can be
+// produced by the vessel's active engines, in Newtons. This is computed by
+// summing <see cref="M:SpaceCenter.Engine.AvailableThrustAtStream" /> for every
+// active engine in the vessel. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Vessel) AvailableThrustAtStream(pressure float64) (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_AvailableThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// MaxThrustAt - the total maximum thrust that can be produced by the vessel's
+// active engines, in Newtons. This is computed by summing <see
+// cref="M:SpaceCenter.Engine.MaxThrustAt" /> for every active engine. Takes the
+// given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Vessel) MaxThrustAt(pressure float64) (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_MaxThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// MaxThrustAtStream - the total maximum thrust that can be produced by the
+// vessel's active engines, in Newtons. This is computed by summing <see
+// cref="M:SpaceCenter.Engine.MaxThrustAtStream" /> for every active engine.
+// Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Vessel) MaxThrustAtStream(pressure float64) (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_MaxThrustAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// SpecificImpulseAt - the combined specific impulse of all active engines, in
+// seconds. This is computed using the formula <a
+// href="https://wiki.kerbalspaceprogram.com/wiki/Specific_impulse#Multiple_engines">described
+// here</a>. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Vessel) SpecificImpulseAt(pressure float64) (float32, error) {
+	var err error
+	var argBytes []byte
+	var vv float32
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_SpecificImpulseAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// SpecificImpulseAtStream - the combined specific impulse of all active
+// engines, in seconds. This is computed using the formula <a
+// href="https://wiki.kerbalspaceprogram.com/wiki/Specific_impulse#Multiple_engines">described
+// here</a>. Takes the given pressure into account.
+//
+// Allowed game scenes: any.
+func (s *Vessel) SpecificImpulseAtStream(pressure float64) (*krpcgo.Stream[float32], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_SpecificImpulseAt",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	argBytes, err = encode.Marshal(pressure)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x1),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) float32 {
+		var value float32
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
 }
 
 // Position - the position of the center of mass of the vessel, in the given
@@ -56836,6 +61097,79 @@ func (s *Vessel) AvailableRCSTorqueStream() (*krpcgo.Stream[types.Tuple2[types.T
 	var argBytes []byte
 	request := &types.ProcedureCall{
 		Procedure: "Vessel_get_AvailableRCSTorque",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	krpc := krpc.New(s.Client)
+	st, err := krpc.AddStream(request, true)
+	if err != nil {
+		return nil, tracerr.Wrap(err)
+	}
+	rawStream := s.Client.GetStream(st.Id)
+	stream := krpcgo.MapStream(rawStream, func(b []byte) types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]] {
+		var value types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]]
+		encode.Unmarshal(b, &value)
+		return value
+	})
+	stream.AddCloser(func() error {
+		return tracerr.Wrap(krpc.RemoveStream(st.Id))
+	})
+	return stream, nil
+}
+
+// AvailableRCSForce - the maximum force that the currently active RCS thrusters
+// can generate. Returns the forces in <math>N</math> along each of the
+// coordinate axes of the vessels reference frame (<see
+// cref="T:SpaceCenter.ReferenceFrame" />). These axes are equivalent to the
+// right, forward and bottom directions of the vessel.
+//
+// Allowed game scenes: any.
+func (s *Vessel) AvailableRCSForce() (types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]], error) {
+	var err error
+	var argBytes []byte
+	var vv types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]]
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_get_AvailableRCSForce",
+		Service:   "SpaceCenter",
+	}
+	argBytes, err = encode.Marshal(s)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	request.Arguments = append(request.Arguments, &types.Argument{
+		Position: uint32(0x0),
+		Value:    argBytes,
+	})
+	result, err := s.Client.Call(request)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	err = encode.Unmarshal(result.Value, &vv)
+	if err != nil {
+		return vv, tracerr.Wrap(err)
+	}
+	return vv, nil
+}
+
+// AvailableRCSForceStream - the maximum force that the currently active RCS
+// thrusters can generate. Returns the forces in <math>N</math> along each of
+// the coordinate axes of the vessels reference frame (<see
+// cref="T:SpaceCenter.ReferenceFrame" />). These axes are equivalent to the
+// right, forward and bottom directions of the vessel.
+//
+// Allowed game scenes: any.
+func (s *Vessel) AvailableRCSForceStream() (*krpcgo.Stream[types.Tuple2[types.Tuple3[float64, float64, float64], types.Tuple3[float64, float64, float64]]], error) {
+	var err error
+	var argBytes []byte
+	request := &types.ProcedureCall{
+		Procedure: "Vessel_get_AvailableRCSForce",
 		Service:   "SpaceCenter",
 	}
 	argBytes, err = encode.Marshal(s)

@@ -1,7 +1,7 @@
 // Package dockingcamera provides methods to invoke procedures in the
 // DockingCamera service.
 //
-// From service docs: camera Service
+// From service docs: camera service.
 package dockingcamera
 
 import (
@@ -28,7 +28,7 @@ func NewCamera(id uint64, client *krpcgo.KRPCClient) *Camera {
 	return c
 }
 
-// DockingCamera - camera Service
+// DockingCamera - camera service.
 type DockingCamera struct {
 	Client *krpcgo.KRPCClient
 }
@@ -38,7 +38,7 @@ func New(client *krpcgo.KRPCClient) *DockingCamera {
 	return &DockingCamera{Client: client}
 }
 
-// Camera - get a Camera part
+// Camera - get a Camera part.
 //
 // Allowed game scenes: any.
 func (s *DockingCamera) Camera(part *spacecenter.Part) (*Camera, error) {
@@ -69,7 +69,7 @@ func (s *DockingCamera) Camera(part *spacecenter.Part) (*Camera, error) {
 	return &vv, nil
 }
 
-// Available - check if the Camera API is avaiable
+// Available - check if the Camera API is available.
 //
 // Allowed game scenes: any.
 func (s *DockingCamera) Available() (bool, error) {
@@ -90,7 +90,7 @@ func (s *DockingCamera) Available() (bool, error) {
 	return vv, nil
 }
 
-// AvailableStream - check if the Camera API is avaiable
+// AvailableStream - check if the Camera API is available.
 //
 // Allowed game scenes: any.
 func (s *DockingCamera) AvailableStream() (*krpcgo.Stream[bool], error) {
@@ -116,7 +116,7 @@ func (s *DockingCamera) AvailableStream() (*krpcgo.Stream[bool], error) {
 	return stream, nil
 }
 
-// Part - get the part containing this Camera.
+// Part - get the part containing this camera.
 //
 // Allowed game scenes: any.
 func (s *Camera) Part() (*spacecenter.Part, error) {
@@ -147,7 +147,7 @@ func (s *Camera) Part() (*spacecenter.Part, error) {
 	return &vv, nil
 }
 
-// Image - get the image.
+// Image - get an image. Returns an empty byte array on failure.
 //
 // Allowed game scenes: any.
 func (s *Camera) Image() ([]byte, error) {
@@ -177,7 +177,7 @@ func (s *Camera) Image() ([]byte, error) {
 	return vv, nil
 }
 
-// ImageStream - get the image.
+// ImageStream - get an image. Returns an empty byte array on failure.
 //
 // Allowed game scenes: any.
 func (s *Camera) ImageStream() (*krpcgo.Stream[[]byte], error) {

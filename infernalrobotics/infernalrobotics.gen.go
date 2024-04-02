@@ -2,7 +2,7 @@
 // InfernalRobotics service.
 //
 // From service docs: this service provides functionality to interact with <a
-// href="https://forum.kerbalspaceprogram.com/index.php?/topic/104535-112-magic-smoke-industries-infernal-robotics-202/">Infernal
+// href="https://forum.kerbalspaceprogram.com/index.php?/topic/184787-infernal-robotics-next/">Infernal
 // Robotics</a>.
 package infernalrobotics
 
@@ -49,7 +49,7 @@ func NewServoGroup(id uint64, client *krpcgo.KRPCClient) *ServoGroup {
 }
 
 // InfernalRobotics - this service provides functionality to interact with <a
-// href="https://forum.kerbalspaceprogram.com/index.php?/topic/104535-112-magic-smoke-industries-infernal-robotics-202/">Infernal
+// href="https://forum.kerbalspaceprogram.com/index.php?/topic/184787-infernal-robotics-next/">Infernal
 // Robotics</a>.
 type InfernalRobotics struct {
 	Client *krpcgo.KRPCClient
@@ -362,56 +362,6 @@ func (s *Servo) MoveCenter() error {
 	var argBytes []byte
 	request := &types.ProcedureCall{
 		Procedure: "Servo_MoveCenter",
-		Service:   "InfernalRobotics",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	_, err = s.Client.Call(request)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	return nil
-}
-
-// MoveNextPreset - moves the servo to the next preset.
-//
-// Allowed game scenes: any.
-func (s *Servo) MoveNextPreset() error {
-	var err error
-	var argBytes []byte
-	request := &types.ProcedureCall{
-		Procedure: "Servo_MoveNextPreset",
-		Service:   "InfernalRobotics",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	_, err = s.Client.Call(request)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	return nil
-}
-
-// MovePrevPreset - moves the servo to the previous preset.
-//
-// Allowed game scenes: any.
-func (s *Servo) MovePrevPreset() error {
-	var err error
-	var argBytes []byte
-	request := &types.ProcedureCall{
-		Procedure: "Servo_MovePrevPreset",
 		Service:   "InfernalRobotics",
 	}
 	argBytes, err = encode.Marshal(s)
@@ -1290,39 +1240,6 @@ func (s *Servo) CurrentSpeedStream() (*krpcgo.Stream[float32], error) {
 		return tracerr.Wrap(krpc.RemoveStream(st.Id))
 	})
 	return stream, nil
-}
-
-// SetCurrentSpeed - the current speed at which the servo is moving.
-//
-// Allowed game scenes: any.
-func (s *Servo) SetCurrentSpeed(value float32) error {
-	var err error
-	var argBytes []byte
-	request := &types.ProcedureCall{
-		Procedure: "Servo_set_CurrentSpeed",
-		Service:   "InfernalRobotics",
-	}
-	argBytes, err = encode.Marshal(s)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x0),
-		Value:    argBytes,
-	})
-	argBytes, err = encode.Marshal(value)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	request.Arguments = append(request.Arguments, &types.Argument{
-		Position: uint32(0x1),
-		Value:    argBytes,
-	})
-	_, err = s.Client.Call(request)
-	if err != nil {
-		return tracerr.Wrap(err)
-	}
-	return nil
 }
 
 // Acceleration - the current speed multiplier set in the UI.
