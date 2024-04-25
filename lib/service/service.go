@@ -13,9 +13,9 @@ type SettableEnum interface {
 
 type Class interface {
 	// ID gets the instance's ID.
-	ID() uint64
+	ID_internal() uint64
 	// SetID sets the instance's ID.
-	SetID(uint64)
+	SetID_internal(uint64)
 }
 
 // BaseClass is the base for all classes.
@@ -27,11 +27,11 @@ type BaseClass struct {
 }
 
 // ID gets the instance's ID.
-func (c *BaseClass) ID() uint64 {
+func (c *BaseClass) ID_internal() uint64 {
 	return c.id
 }
 
 // SetID sets the instance's ID.
-func (c *BaseClass) SetID(id uint64) {
+func (c *BaseClass) SetID_internal(id uint64) {
 	c.id = id
 }

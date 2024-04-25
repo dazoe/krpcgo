@@ -44,7 +44,7 @@ func TestLaunch(t *testing.T) {
 	// TODO: would be nice if kRPC had a way to get the whole roster
 	k, err := sc.GetKerbal("Tester Kerman")
 	require.NoError(t, err)
-	if k.ID() == 0 { //null :)
+	if k.ID_internal() == 0 { //null :)
 		t.Log("Creating Tester Kerman")
 		require.NoError(t, sc.CreateKerbal("Tester Kerman", "Pilot", true))
 	}
@@ -59,7 +59,7 @@ func TestLaunch(t *testing.T) {
 
 	k, err = sc.GetKerbal("Tester2 Kerman")
 	require.NoError(t, err)
-	if k.ID() == 0 { //null :)
+	if k.ID_internal() == 0 { //null :)
 		t.Log("Creating Tester2 Kerman")
 		require.NoError(t, sc.CreateKerbal("Tester2 Kerman", "Pilot", true))
 	}

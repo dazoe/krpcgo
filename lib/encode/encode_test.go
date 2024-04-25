@@ -15,7 +15,7 @@ type testClass struct {
 
 func newTestClass(id uint64) *testClass {
 	c := testClass{}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return &c
 }
 

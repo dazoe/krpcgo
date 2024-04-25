@@ -35,7 +35,7 @@ func GenerateClass(f *jen.File, class *types.Class) error {
 				jen.Id("Client"): jen.Id("client"),
 			}),
 		}),
-		jen.Id("c").Dot("SetID").Call(jen.Id("id")),
+		jen.Id("c").Dot("SetID_internal").Call(jen.Id("id")),
 		jen.Return(jen.Id("c")),
 	)
 	return nil

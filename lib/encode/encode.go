@@ -26,7 +26,7 @@ func Marshal(m interface{}) ([]byte, error) {
 	case proto.Message:
 		b, err = proto.Marshal(v)
 	case service.Class:
-		b, err = Marshal(v.ID())
+		b, err = Marshal(v.ID_internal())
 	case service.Enum:
 		b, err = Marshal(v.Value())
 	// Varints
@@ -151,7 +151,7 @@ func Unmarshal(b []byte, m interface{}) error {
 	case service.Class:
 		err = Unmarshal(b, &u)
 		if err == nil {
-			v.SetID(u)
+			v.SetID_internal(u)
 		}
 	case service.SettableEnum:
 		var value int32
