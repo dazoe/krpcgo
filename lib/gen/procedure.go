@@ -151,6 +151,9 @@ func generateProcedureBody(serviceName string, procedure *types.Procedure) (func
 			errCheck,
 		)
 		if procedure.ReturnType.Code == types.Type_CLASS {
+			funcBody = append(funcBody, jen.If(jen.Id("vv").Dot("ID_internal").Call().Op("==").Lit(0)).Block(
+				jen.Return(jen.Nil(), jen.Nil()),
+			))
 			funcBody = append(funcBody,
 				jen.Id("vv").Dot("Client").Op("=").Id("s").Dot("Client"),
 			)
