@@ -29,7 +29,7 @@ type Servo struct {
 // NewServo creates a new Servo.
 func NewServo(id uint64, client *krpcgo.KRPCClient) *Servo {
 	c := &Servo{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -44,7 +44,7 @@ type ServoGroup struct {
 // NewServoGroup creates a new ServoGroup.
 func NewServoGroup(id uint64, client *krpcgo.KRPCClient) *ServoGroup {
 	c := &ServoGroup{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -168,6 +168,9 @@ func (s *InfernalRobotics) ServoGroupWithName(vessel *spacecenter.Vessel, name s
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -208,6 +211,9 @@ func (s *InfernalRobotics) ServoWithName(vessel *spacecenter.Vessel, name string
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -573,6 +579,9 @@ func (s *Servo) Part() (*spacecenter.Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1704,6 +1713,9 @@ func (s *ServoGroup) ServoWithName(name string) (*Servo, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

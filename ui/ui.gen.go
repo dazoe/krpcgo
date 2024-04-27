@@ -115,7 +115,7 @@ type Button struct {
 // NewButton creates a new Button.
 func NewButton(id uint64, client *krpcgo.KRPCClient) *Button {
 	c := &Button{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -128,7 +128,7 @@ type Canvas struct {
 // NewCanvas creates a new Canvas.
 func NewCanvas(id uint64, client *krpcgo.KRPCClient) *Canvas {
 	c := &Canvas{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -140,7 +140,7 @@ type InputField struct {
 // NewInputField creates a new InputField.
 func NewInputField(id uint64, client *krpcgo.KRPCClient) *InputField {
 	c := &InputField{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -153,7 +153,7 @@ type Panel struct {
 // NewPanel creates a new Panel.
 func NewPanel(id uint64, client *krpcgo.KRPCClient) *Panel {
 	c := &Panel{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -167,7 +167,7 @@ type RectTransform struct {
 // NewRectTransform creates a new RectTransform.
 func NewRectTransform(id uint64, client *krpcgo.KRPCClient) *RectTransform {
 	c := &RectTransform{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -179,7 +179,7 @@ type Text struct {
 // NewText creates a new Text.
 func NewText(id uint64, client *krpcgo.KRPCClient) *Text {
 	c := &Text{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -211,6 +211,9 @@ func (s *UI) AddCanvas() (*Canvas, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -316,6 +319,9 @@ func (s *UI) StockCanvas() (*Canvas, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -372,6 +378,9 @@ func (s *Button) RectTransform() (*RectTransform, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -402,6 +411,9 @@ func (s *Button) Text() (*Text, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -638,6 +650,9 @@ func (s *Canvas) AddPanel(visible bool) (*Panel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -685,6 +700,9 @@ func (s *Canvas) AddText(content string, visible bool) (*Text, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -723,6 +741,9 @@ func (s *Canvas) AddInputField(visible bool) (*InputField, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -770,6 +791,9 @@ func (s *Canvas) AddButton(content string, visible bool) (*Button, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -826,6 +850,9 @@ func (s *Canvas) RectTransform() (*RectTransform, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -981,6 +1008,9 @@ func (s *InputField) RectTransform() (*RectTransform, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1109,6 +1139,9 @@ func (s *InputField) Text() (*Text, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1345,6 +1378,9 @@ func (s *Panel) AddPanel(visible bool) (*Panel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1392,6 +1428,9 @@ func (s *Panel) AddText(content string, visible bool) (*Text, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1430,6 +1469,9 @@ func (s *Panel) AddInputField(visible bool) (*InputField, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1477,6 +1519,9 @@ func (s *Panel) AddButton(content string, visible bool) (*Button, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1533,6 +1578,9 @@ func (s *Panel) RectTransform() (*RectTransform, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2723,6 +2771,9 @@ func (s *Text) RectTransform() (*RectTransform, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

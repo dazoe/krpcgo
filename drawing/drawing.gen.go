@@ -25,7 +25,7 @@ type Line struct {
 // NewLine creates a new Line.
 func NewLine(id uint64, client *krpcgo.KRPCClient) *Line {
 	c := &Line{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -37,7 +37,7 @@ type Polygon struct {
 // NewPolygon creates a new Polygon.
 func NewPolygon(id uint64, client *krpcgo.KRPCClient) *Polygon {
 	c := &Polygon{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -49,7 +49,7 @@ type Text struct {
 // NewText creates a new Text.
 func NewText(id uint64, client *krpcgo.KRPCClient) *Text {
 	c := &Text{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -114,6 +114,9 @@ func (s *Drawing) AddLine(start types.Tuple3[float64, float64, float64], end typ
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -169,6 +172,9 @@ func (s *Drawing) AddDirection(direction types.Tuple3[float64, float64, float64]
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -226,6 +232,9 @@ func (s *Drawing) AddDirectionFromCom(direction types.Tuple3[float64, float64, f
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -272,6 +281,9 @@ func (s *Drawing) AddPolygon(vertices []types.Tuple3[float64, float64, float64],
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -335,6 +347,9 @@ func (s *Drawing) AddText(text string, referenceFrame *spacecenter.ReferenceFram
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -808,6 +823,9 @@ func (s *Line) ReferenceFrame() (*spacecenter.ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1390,6 +1408,9 @@ func (s *Polygon) ReferenceFrame() (*spacecenter.ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2803,6 +2824,9 @@ func (s *Text) ReferenceFrame() (*spacecenter.ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

@@ -52,7 +52,7 @@ type Antenna struct {
 // NewAntenna creates a new Antenna.
 func NewAntenna(id uint64, client *krpcgo.KRPCClient) *Antenna {
 	c := &Antenna{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -64,7 +64,7 @@ type Comms struct {
 // NewComms creates a new Comms.
 func NewComms(id uint64, client *krpcgo.KRPCClient) *Comms {
 	c := &Comms{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -107,6 +107,9 @@ func (s *RemoteTech) Comms(vessel *spacecenter.Vessel) (*Comms, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -137,6 +140,9 @@ func (s *RemoteTech) Antenna(part *spacecenter.Part) (*Antenna, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -262,6 +268,9 @@ func (s *Antenna) Part() (*spacecenter.Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -475,6 +484,9 @@ func (s *Antenna) TargetBody() (*spacecenter.CelestialBody, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -637,6 +649,9 @@ func (s *Antenna) TargetVessel() (*spacecenter.Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -783,6 +798,9 @@ func (s *Comms) Vessel() (*spacecenter.Vessel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

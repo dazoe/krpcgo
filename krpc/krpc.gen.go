@@ -109,7 +109,7 @@ type Expression struct {
 // NewExpression creates a new Expression.
 func NewExpression(id uint64, client *krpcgo.KRPCClient) *Expression {
 	c := &Expression{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -121,7 +121,7 @@ type Type struct {
 // NewType creates a new Type.
 func NewType(id uint64, client *krpcgo.KRPCClient) *Type {
 	c := &Type{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -617,6 +617,9 @@ func (s *Expression) ConstantDouble() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -647,6 +650,9 @@ func (s *Expression) ConstantFloat() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -679,6 +685,9 @@ func (s *Expression) ConstantInt() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -709,6 +718,9 @@ func (s *Expression) ConstantBool() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -741,6 +753,9 @@ func (s *Expression) ConstantString() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -771,6 +786,9 @@ func (s *Expression) Call() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -811,6 +829,9 @@ func (s *Expression) Equal(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -849,6 +870,9 @@ func (s *Expression) NotEqual(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -889,6 +913,9 @@ func (s *Expression) GreaterThan(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -927,6 +954,9 @@ func (s *Expression) GreaterThanOrEqual(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -967,6 +997,9 @@ func (s *Expression) LessThan(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1005,6 +1038,9 @@ func (s *Expression) LessThanOrEqual(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1045,6 +1081,9 @@ func (s *Expression) And(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1083,6 +1122,9 @@ func (s *Expression) Or(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1123,6 +1165,9 @@ func (s *Expression) ExclusiveOr(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1153,6 +1198,9 @@ func (s *Expression) Not() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1193,6 +1241,9 @@ func (s *Expression) Add(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1231,6 +1282,9 @@ func (s *Expression) Subtract(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1271,6 +1325,9 @@ func (s *Expression) Multiply(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1309,6 +1366,9 @@ func (s *Expression) Divide(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1349,6 +1409,9 @@ func (s *Expression) Modulo(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1387,6 +1450,9 @@ func (s *Expression) Power(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1427,6 +1493,9 @@ func (s *Expression) LeftShift(arg1 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1465,6 +1534,9 @@ func (s *Expression) RightShift(arg1 *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1505,6 +1577,9 @@ func (s *Expression) Cast(t *Type) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1543,6 +1618,9 @@ func (s *Expression) Parameter(t *Type) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1583,6 +1661,9 @@ func (s *Expression) Function(body *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1622,6 +1703,9 @@ func (s *Expression) Invoke(args map[string]*Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1652,6 +1736,9 @@ func (s *Expression) CreateTuple() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1684,6 +1771,9 @@ func (s *Expression) CreateList() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1714,6 +1804,9 @@ func (s *Expression) CreateSet() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1755,6 +1848,9 @@ func (s *Expression) CreateDictionary(values []*Expression) (*Expression, error)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1786,6 +1882,9 @@ func (s *Expression) ToList() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1816,6 +1915,9 @@ func (s *Expression) ToSet() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1856,6 +1958,9 @@ func (s *Expression) Get(index *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1886,6 +1991,9 @@ func (s *Expression) Count() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1918,6 +2026,9 @@ func (s *Expression) Sum() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1948,6 +2059,9 @@ func (s *Expression) Max() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1980,6 +2094,9 @@ func (s *Expression) Min() (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2010,6 +2127,9 @@ func (s *Expression) Average() (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2050,6 +2170,9 @@ func (s *Expression) Select(f *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2088,6 +2211,9 @@ func (s *Expression) Where(f *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2128,6 +2254,9 @@ func (s *Expression) Contains(value *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2166,6 +2295,9 @@ func (s *Expression) Aggregate(f *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2215,6 +2347,9 @@ func (s *Expression) AggregateWithSeed(seed *Expression, f *Expression) (*Expres
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2254,6 +2389,9 @@ func (s *Expression) Concat(arg2 *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2292,6 +2430,9 @@ func (s *Expression) OrderBy(key *Expression) (*Expression, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2333,6 +2474,9 @@ func (s *Expression) All(predicate *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2373,6 +2517,9 @@ func (s *Expression) Any(predicate *Expression) (*Expression, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2394,6 +2541,9 @@ func (s *Type) Double() (*Type, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2417,6 +2567,9 @@ func (s *Type) Float() (*Type, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2438,6 +2591,9 @@ func (s *Type) Int() (*Type, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -2461,6 +2617,9 @@ func (s *Type) Bool() (*Type, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2482,6 +2641,9 @@ func (s *Type) String() (*Type, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

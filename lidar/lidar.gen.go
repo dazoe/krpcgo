@@ -23,7 +23,7 @@ type Laser struct {
 // NewLaser creates a new Laser.
 func NewLaser(id uint64, client *krpcgo.KRPCClient) *Laser {
 	c := &Laser{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -63,6 +63,9 @@ func (s *LiDAR) Laser(part *spacecenter.Part) (*Laser, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -141,6 +144,9 @@ func (s *Laser) Part() (*spacecenter.Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

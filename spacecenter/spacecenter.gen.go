@@ -899,7 +899,7 @@ type Alarm struct {
 // NewAlarm creates a new Alarm.
 func NewAlarm(id uint64, client *krpcgo.KRPCClient) *Alarm {
 	c := &Alarm{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -912,7 +912,7 @@ type AlarmManager struct {
 // NewAlarmManager creates a new AlarmManager.
 func NewAlarmManager(id uint64, client *krpcgo.KRPCClient) *AlarmManager {
 	c := &AlarmManager{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -925,7 +925,7 @@ type AutoPilot struct {
 // NewAutoPilot creates a new AutoPilot.
 func NewAutoPilot(id uint64, client *krpcgo.KRPCClient) *AutoPilot {
 	c := &AutoPilot{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -938,7 +938,7 @@ type Camera struct {
 // NewCamera creates a new Camera.
 func NewCamera(id uint64, client *krpcgo.KRPCClient) *Camera {
 	c := &Camera{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -951,7 +951,7 @@ type CelestialBody struct {
 // NewCelestialBody creates a new CelestialBody.
 func NewCelestialBody(id uint64, client *krpcgo.KRPCClient) *CelestialBody {
 	c := &CelestialBody{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -964,7 +964,7 @@ type CommLink struct {
 // NewCommLink creates a new CommLink.
 func NewCommLink(id uint64, client *krpcgo.KRPCClient) *CommLink {
 	c := &CommLink{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -977,7 +977,7 @@ type CommNode struct {
 // NewCommNode creates a new CommNode.
 func NewCommNode(id uint64, client *krpcgo.KRPCClient) *CommNode {
 	c := &CommNode{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -990,7 +990,7 @@ type Comms struct {
 // NewComms creates a new Comms.
 func NewComms(id uint64, client *krpcgo.KRPCClient) *Comms {
 	c := &Comms{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1003,7 +1003,7 @@ type Contract struct {
 // NewContract creates a new Contract.
 func NewContract(id uint64, client *krpcgo.KRPCClient) *Contract {
 	c := &Contract{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1016,7 +1016,7 @@ type ContractManager struct {
 // NewContractManager creates a new ContractManager.
 func NewContractManager(id uint64, client *krpcgo.KRPCClient) *ContractManager {
 	c := &ContractManager{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1029,7 +1029,7 @@ type ContractParameter struct {
 // NewContractParameter creates a new ContractParameter.
 func NewContractParameter(id uint64, client *krpcgo.KRPCClient) *ContractParameter {
 	c := &ContractParameter{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1044,7 +1044,7 @@ type Control struct {
 // NewControl creates a new Control.
 func NewControl(id uint64, client *krpcgo.KRPCClient) *Control {
 	c := &Control{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1057,7 +1057,7 @@ type CrewMember struct {
 // NewCrewMember creates a new CrewMember.
 func NewCrewMember(id uint64, client *krpcgo.KRPCClient) *CrewMember {
 	c := &CrewMember{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1072,7 +1072,7 @@ type Flight struct {
 // NewFlight creates a new Flight.
 func NewFlight(id uint64, client *krpcgo.KRPCClient) *Flight {
 	c := &Flight{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1085,7 +1085,7 @@ type LaunchSite struct {
 // NewLaunchSite creates a new LaunchSite.
 func NewLaunchSite(id uint64, client *krpcgo.KRPCClient) *LaunchSite {
 	c := &LaunchSite{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1098,7 +1098,7 @@ type Node struct {
 // NewNode creates a new Node.
 func NewNode(id uint64, client *krpcgo.KRPCClient) *Node {
 	c := &Node{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1112,7 +1112,7 @@ type Orbit struct {
 // NewOrbit creates a new Orbit.
 func NewOrbit(id uint64, client *krpcgo.KRPCClient) *Orbit {
 	c := &Orbit{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1125,7 +1125,7 @@ type Antenna struct {
 // NewAntenna creates a new Antenna.
 func NewAntenna(id uint64, client *krpcgo.KRPCClient) *Antenna {
 	c := &Antenna{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1138,7 +1138,7 @@ type CargoBay struct {
 // NewCargoBay creates a new CargoBay.
 func NewCargoBay(id uint64, client *krpcgo.KRPCClient) *CargoBay {
 	c := &CargoBay{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1151,7 +1151,7 @@ type ControlSurface struct {
 // NewControlSurface creates a new ControlSurface.
 func NewControlSurface(id uint64, client *krpcgo.KRPCClient) *ControlSurface {
 	c := &ControlSurface{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1164,7 +1164,7 @@ type Decoupler struct {
 // NewDecoupler creates a new Decoupler.
 func NewDecoupler(id uint64, client *krpcgo.KRPCClient) *Decoupler {
 	c := &Decoupler{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1177,7 +1177,7 @@ type DockingPort struct {
 // NewDockingPort creates a new DockingPort.
 func NewDockingPort(id uint64, client *krpcgo.KRPCClient) *DockingPort {
 	c := &DockingPort{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1191,7 +1191,7 @@ type Engine struct {
 // NewEngine creates a new Engine.
 func NewEngine(id uint64, client *krpcgo.KRPCClient) *Engine {
 	c := &Engine{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1204,7 +1204,7 @@ type Experiment struct {
 // NewExperiment creates a new Experiment.
 func NewExperiment(id uint64, client *krpcgo.KRPCClient) *Experiment {
 	c := &Experiment{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1218,7 +1218,7 @@ type Fairing struct {
 // NewFairing creates a new Fairing.
 func NewFairing(id uint64, client *krpcgo.KRPCClient) *Fairing {
 	c := &Fairing{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1230,7 +1230,7 @@ type Force struct {
 // NewForce creates a new Force.
 func NewForce(id uint64, client *krpcgo.KRPCClient) *Force {
 	c := &Force{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1243,7 +1243,7 @@ type Intake struct {
 // NewIntake creates a new Intake.
 func NewIntake(id uint64, client *krpcgo.KRPCClient) *Intake {
 	c := &Intake{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1256,7 +1256,7 @@ type LaunchClamp struct {
 // NewLaunchClamp creates a new LaunchClamp.
 func NewLaunchClamp(id uint64, client *krpcgo.KRPCClient) *LaunchClamp {
 	c := &LaunchClamp{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1269,7 +1269,7 @@ type Leg struct {
 // NewLeg creates a new Leg.
 func NewLeg(id uint64, client *krpcgo.KRPCClient) *Leg {
 	c := &Leg{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1281,7 +1281,7 @@ type Light struct {
 // NewLight creates a new Light.
 func NewLight(id uint64, client *krpcgo.KRPCClient) *Light {
 	c := &Light{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1299,7 +1299,7 @@ type Module struct {
 // NewModule creates a new Module.
 func NewModule(id uint64, client *krpcgo.KRPCClient) *Module {
 	c := &Module{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1312,7 +1312,7 @@ type Parachute struct {
 // NewParachute creates a new Parachute.
 func NewParachute(id uint64, client *krpcgo.KRPCClient) *Parachute {
 	c := &Parachute{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1326,7 +1326,7 @@ type Part struct {
 // NewPart creates a new Part.
 func NewPart(id uint64, client *krpcgo.KRPCClient) *Part {
 	c := &Part{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1340,7 +1340,7 @@ type Parts struct {
 // NewParts creates a new Parts.
 func NewParts(id uint64, client *krpcgo.KRPCClient) *Parts {
 	c := &Parts{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1353,7 +1353,7 @@ type Propellant struct {
 // NewPropellant creates a new Propellant.
 func NewPropellant(id uint64, client *krpcgo.KRPCClient) *Propellant {
 	c := &Propellant{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1366,7 +1366,7 @@ type RCS struct {
 // NewRCS creates a new RCS.
 func NewRCS(id uint64, client *krpcgo.KRPCClient) *RCS {
 	c := &RCS{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1379,7 +1379,7 @@ type Radiator struct {
 // NewRadiator creates a new Radiator.
 func NewRadiator(id uint64, client *krpcgo.KRPCClient) *Radiator {
 	c := &Radiator{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1392,7 +1392,7 @@ type ReactionWheel struct {
 // NewReactionWheel creates a new ReactionWheel.
 func NewReactionWheel(id uint64, client *krpcgo.KRPCClient) *ReactionWheel {
 	c := &ReactionWheel{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1405,7 +1405,7 @@ type ResourceConverter struct {
 // NewResourceConverter creates a new ResourceConverter.
 func NewResourceConverter(id uint64, client *krpcgo.KRPCClient) *ResourceConverter {
 	c := &ResourceConverter{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1418,7 +1418,7 @@ type ResourceDrain struct {
 // NewResourceDrain creates a new ResourceDrain.
 func NewResourceDrain(id uint64, client *krpcgo.KRPCClient) *ResourceDrain {
 	c := &ResourceDrain{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1431,7 +1431,7 @@ type ResourceHarvester struct {
 // NewResourceHarvester creates a new ResourceHarvester.
 func NewResourceHarvester(id uint64, client *krpcgo.KRPCClient) *ResourceHarvester {
 	c := &ResourceHarvester{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1444,7 +1444,7 @@ type RoboticController struct {
 // NewRoboticController creates a new RoboticController.
 func NewRoboticController(id uint64, client *krpcgo.KRPCClient) *RoboticController {
 	c := &RoboticController{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1457,7 +1457,7 @@ type RoboticHinge struct {
 // NewRoboticHinge creates a new RoboticHinge.
 func NewRoboticHinge(id uint64, client *krpcgo.KRPCClient) *RoboticHinge {
 	c := &RoboticHinge{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1470,7 +1470,7 @@ type RoboticPiston struct {
 // NewRoboticPiston creates a new RoboticPiston.
 func NewRoboticPiston(id uint64, client *krpcgo.KRPCClient) *RoboticPiston {
 	c := &RoboticPiston{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1483,7 +1483,7 @@ type RoboticRotation struct {
 // NewRoboticRotation creates a new RoboticRotation.
 func NewRoboticRotation(id uint64, client *krpcgo.KRPCClient) *RoboticRotation {
 	c := &RoboticRotation{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1496,7 +1496,7 @@ type RoboticRotor struct {
 // NewRoboticRotor creates a new RoboticRotor.
 func NewRoboticRotor(id uint64, client *krpcgo.KRPCClient) *RoboticRotor {
 	c := &RoboticRotor{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1509,7 +1509,7 @@ type ScienceData struct {
 // NewScienceData creates a new ScienceData.
 func NewScienceData(id uint64, client *krpcgo.KRPCClient) *ScienceData {
 	c := &ScienceData{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1522,7 +1522,7 @@ type ScienceSubject struct {
 // NewScienceSubject creates a new ScienceSubject.
 func NewScienceSubject(id uint64, client *krpcgo.KRPCClient) *ScienceSubject {
 	c := &ScienceSubject{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1535,7 +1535,7 @@ type Sensor struct {
 // NewSensor creates a new Sensor.
 func NewSensor(id uint64, client *krpcgo.KRPCClient) *Sensor {
 	c := &Sensor{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1548,7 +1548,7 @@ type SolarPanel struct {
 // NewSolarPanel creates a new SolarPanel.
 func NewSolarPanel(id uint64, client *krpcgo.KRPCClient) *SolarPanel {
 	c := &SolarPanel{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1563,7 +1563,7 @@ type Thruster struct {
 // NewThruster creates a new Thruster.
 func NewThruster(id uint64, client *krpcgo.KRPCClient) *Thruster {
 	c := &Thruster{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1577,7 +1577,7 @@ type Wheel struct {
 // NewWheel creates a new Wheel.
 func NewWheel(id uint64, client *krpcgo.KRPCClient) *Wheel {
 	c := &Wheel{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1594,7 +1594,7 @@ type ReferenceFrame struct {
 // NewReferenceFrame creates a new ReferenceFrame.
 func NewReferenceFrame(id uint64, client *krpcgo.KRPCClient) *ReferenceFrame {
 	c := &ReferenceFrame{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1607,7 +1607,7 @@ type Resource struct {
 // NewResource creates a new Resource.
 func NewResource(id uint64, client *krpcgo.KRPCClient) *Resource {
 	c := &Resource{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1619,7 +1619,7 @@ type ResourceTransfer struct {
 // NewResourceTransfer creates a new ResourceTransfer.
 func NewResourceTransfer(id uint64, client *krpcgo.KRPCClient) *ResourceTransfer {
 	c := &ResourceTransfer{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1634,7 +1634,7 @@ type Resources struct {
 // NewResources creates a new Resources.
 func NewResources(id uint64, client *krpcgo.KRPCClient) *Resources {
 	c := &Resources{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1649,7 +1649,7 @@ type Vessel struct {
 // NewVessel creates a new Vessel.
 func NewVessel(id uint64, client *krpcgo.KRPCClient) *Vessel {
 	c := &Vessel{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1662,7 +1662,7 @@ type Waypoint struct {
 // NewWaypoint creates a new Waypoint.
 func NewWaypoint(id uint64, client *krpcgo.KRPCClient) *Waypoint {
 	c := &Waypoint{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -1677,7 +1677,7 @@ type WaypointManager struct {
 // NewWaypointManager creates a new WaypointManager.
 func NewWaypointManager(id uint64, client *krpcgo.KRPCClient) *WaypointManager {
 	c := &WaypointManager{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -2766,6 +2766,9 @@ func (s *SpaceCenter) RaycastPart(position types.Tuple3[float64, float64, float6
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -2837,6 +2840,9 @@ func (s *SpaceCenter) GetKerbal(name string) (*CrewMember, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -3097,6 +3103,9 @@ func (s *SpaceCenter) ActiveVessel() (*Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -3293,6 +3302,9 @@ func (s *SpaceCenter) TargetBody() (*CelestialBody, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -3339,6 +3351,9 @@ func (s *SpaceCenter) TargetVessel() (*Vessel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -3387,6 +3402,9 @@ func (s *SpaceCenter) TargetDockingPort() (*DockingPort, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -3434,6 +3452,9 @@ func (s *SpaceCenter) WaypointManager() (*WaypointManager, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -3455,6 +3476,9 @@ func (s *SpaceCenter) ContractManager() (*ContractManager, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -3478,6 +3502,9 @@ func (s *SpaceCenter) AlarmManager() (*AlarmManager, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -3499,6 +3526,9 @@ func (s *SpaceCenter) Camera() (*Camera, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -4740,6 +4770,9 @@ func (s *Alarm) Vessel() (*Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -4786,6 +4819,9 @@ func (s *AlarmManager) AddAlarm(title string, description string) (*Alarm, error
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -4842,6 +4878,9 @@ func (s *AlarmManager) AddVesselAlarm(vessel *Vessel, title string, description 
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -4897,6 +4936,9 @@ func (s *AlarmManager) AddApoapsisAlarm(offset float64, title string, descriptio
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -4951,6 +4993,9 @@ func (s *AlarmManager) AddPeriapsisAlarm(offset float64, title string, descripti
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -5024,6 +5069,9 @@ func (s *AlarmManager) AddManeuverNodeAlarm(node *Node, offset float64, addBurnT
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -5079,6 +5127,9 @@ func (s *AlarmManager) AddSOIAlarm(offset float64, title string, description str
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -5571,6 +5622,9 @@ func (s *AutoPilot) ReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -8003,6 +8057,9 @@ func (s *Camera) FocussedBody() (*CelestialBody, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -8071,6 +8128,9 @@ func (s *Camera) FocussedVessel() (*Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -8138,6 +8198,9 @@ func (s *Camera) FocussedNode() (*Node, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -10789,6 +10852,9 @@ func (s *CelestialBody) Orbit() (*Orbit, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -11356,6 +11422,9 @@ func (s *CelestialBody) ReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -11396,6 +11465,9 @@ func (s *CelestialBody) NonRotatingReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -11435,6 +11507,9 @@ func (s *CelestialBody) OrbitalReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -11597,6 +11672,9 @@ func (s *CommLink) Start() (*CommNode, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -11627,6 +11705,9 @@ func (s *CommLink) End() (*CommNode, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -11920,6 +12001,9 @@ func (s *CommNode) Vessel() (*Vessel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -15176,6 +15260,9 @@ func (s *Control) AddNode(ut float64, prograde float32, normal float32, radial f
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -23396,6 +23483,9 @@ func (s *LaunchSite) Body() (*CelestialBody, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -24479,6 +24569,9 @@ func (s *Node) Orbit() (*Orbit, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -24514,6 +24607,9 @@ func (s *Node) ReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -24555,6 +24651,9 @@ func (s *Node) OrbitalReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -25990,6 +26089,9 @@ func (s *Orbit) Body() (*CelestialBody, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -27364,6 +27466,9 @@ func (s *Orbit) NextOrbit() (*Orbit, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -27578,6 +27683,9 @@ func (s *Antenna) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -28395,6 +28503,9 @@ func (s *CargoBay) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -28588,6 +28699,9 @@ func (s *ControlSurface) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -29348,6 +29462,9 @@ func (s *Decoupler) Decouple() (*Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -29378,6 +29495,9 @@ func (s *Decoupler) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -29609,6 +29729,9 @@ func (s *DockingPort) Undock() (*Vessel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -29888,6 +30011,9 @@ func (s *DockingPort) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -29984,6 +30110,9 @@ func (s *DockingPort) DockedPart() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -30661,6 +30790,9 @@ func (s *DockingPort) ReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -30970,6 +31102,9 @@ func (s *Engine) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -33286,6 +33421,9 @@ func (s *Experiment) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -33913,6 +34051,9 @@ func (s *Experiment) ScienceSubject() (*ScienceSubject, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -33969,6 +34110,9 @@ func (s *Fairing) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -34090,6 +34234,9 @@ func (s *Force) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -34321,6 +34468,9 @@ func (s *Force) ReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -34384,6 +34534,9 @@ func (s *Intake) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -34736,6 +34889,9 @@ func (s *LaunchClamp) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -34766,6 +34922,9 @@ func (s *Leg) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -35090,6 +35249,9 @@ func (s *Light) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -36841,6 +37003,9 @@ func (s *Module) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -37353,6 +37518,9 @@ func (s *Parachute) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -38300,6 +38468,9 @@ func (s *Part) AddForce(force types.Tuple3[float64, float64, float64], position 
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -38978,6 +39149,9 @@ func (s *Part) Vessel() (*Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -39010,6 +39184,9 @@ func (s *Part) Parent() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -40602,6 +40779,9 @@ func (s *Part) Resources() (*Resources, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41037,6 +41217,9 @@ func (s *Part) Antenna() (*Antenna, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41068,6 +41251,9 @@ func (s *Part) CargoBay() (*CargoBay, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41101,6 +41287,9 @@ func (s *Part) ControlSurface() (*ControlSurface, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41132,6 +41321,9 @@ func (s *Part) Decoupler() (*Decoupler, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41165,6 +41357,9 @@ func (s *Part) DockingPort() (*DockingPort, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41196,6 +41391,9 @@ func (s *Part) ResourceDrain() (*ResourceDrain, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41229,6 +41427,9 @@ func (s *Part) Engine() (*Engine, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41260,6 +41461,9 @@ func (s *Part) Experiment() (*Experiment, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41363,6 +41567,9 @@ func (s *Part) Fairing() (*Fairing, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41394,6 +41601,9 @@ func (s *Part) Intake() (*Intake, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41427,6 +41637,9 @@ func (s *Part) Leg() (*Leg, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41458,6 +41671,9 @@ func (s *Part) LaunchClamp() (*LaunchClamp, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41491,6 +41707,9 @@ func (s *Part) Light() (*Light, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41522,6 +41741,9 @@ func (s *Part) Parachute() (*Parachute, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41555,6 +41777,9 @@ func (s *Part) Radiator() (*Radiator, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41586,6 +41811,9 @@ func (s *Part) RCS() (*RCS, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41619,6 +41847,9 @@ func (s *Part) ReactionWheel() (*ReactionWheel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41650,6 +41881,9 @@ func (s *Part) ResourceConverter() (*ResourceConverter, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41683,6 +41917,9 @@ func (s *Part) ResourceHarvester() (*ResourceHarvester, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41714,6 +41951,9 @@ func (s *Part) Sensor() (*Sensor, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41747,6 +41987,9 @@ func (s *Part) SolarPanel() (*SolarPanel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41778,6 +42021,9 @@ func (s *Part) Wheel() (*Wheel, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41811,6 +42057,9 @@ func (s *Part) RoboticController() (*RoboticController, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41842,6 +42091,9 @@ func (s *Part) RoboticHinge() (*RoboticHinge, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -41875,6 +42127,9 @@ func (s *Part) RoboticPiston() (*RoboticPiston, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41907,6 +42162,9 @@ func (s *Part) RoboticRotation() (*RoboticRotation, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -41938,6 +42196,9 @@ func (s *Part) RoboticRotor() (*RoboticRotor, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -42114,6 +42375,9 @@ func (s *Part) ReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -42150,6 +42414,9 @@ func (s *Part) CenterOfMassReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -42954,6 +43221,9 @@ func (s *Parts) Root() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -42984,6 +43254,9 @@ func (s *Parts) Controlling() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -45475,6 +45748,9 @@ func (s *RCS) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -47205,6 +47481,9 @@ func (s *Radiator) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -47466,6 +47745,9 @@ func (s *ReactionWheel) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -48361,6 +48643,9 @@ func (s *ResourceConverter) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -48828,6 +49113,9 @@ func (s *ResourceDrain) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -49252,6 +49540,9 @@ func (s *ResourceHarvester) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -50280,6 +50571,9 @@ func (s *RoboticController) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -50335,6 +50629,9 @@ func (s *RoboticHinge) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -50947,6 +51244,9 @@ func (s *RoboticPiston) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -51558,6 +51858,9 @@ func (s *RoboticRotation) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -52143,6 +52446,9 @@ func (s *RoboticRotor) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -53387,6 +53693,9 @@ func (s *Sensor) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -53580,6 +53889,9 @@ func (s *SolarPanel) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -54399,6 +54711,9 @@ func (s *Thruster) Part() (*Part, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -54440,6 +54755,9 @@ func (s *Thruster) ThrustReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -54603,6 +54921,9 @@ func (s *Wheel) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -57206,6 +57527,9 @@ func (s *ReferenceFrame) CreateRelative(position types.Tuple3[float64, float64, 
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -57261,6 +57585,9 @@ func (s *ReferenceFrame) CreateHybrid(rotation *ReferenceFrame, velocity *Refere
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -57357,6 +57684,9 @@ func (s *Resource) Part() (*Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -57777,6 +58107,9 @@ func (s *ResourceTransfer) Start(toPart *Part, resource string, maxAmount float3
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -58664,6 +58997,9 @@ func (s *Vessel) Flight(referenceFrame *ReferenceFrame) (*Flight, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -58712,6 +59048,9 @@ func (s *Vessel) ResourcesInDecoupleStage(stage int32, cumulative bool) (*Resour
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -59957,6 +60296,9 @@ func (s *Vessel) Orbit() (*Orbit, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -59990,6 +60332,9 @@ func (s *Vessel) Control() (*Control, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -60022,6 +60367,9 @@ func (s *Vessel) Comms() (*Comms, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -60053,6 +60401,9 @@ func (s *Vessel) AutoPilot() (*AutoPilot, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -60284,6 +60635,9 @@ func (s *Vessel) Resources() (*Resources, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -60315,6 +60669,9 @@ func (s *Vessel) Parts() (*Parts, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -61634,6 +61991,9 @@ func (s *Vessel) ReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -61673,6 +62033,9 @@ func (s *Vessel) OrbitalReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -61721,6 +62084,9 @@ func (s *Vessel) SurfaceReferenceFrame() (*ReferenceFrame, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -61762,6 +62128,9 @@ func (s *Vessel) SurfaceVelocityReferenceFrame() (*ReferenceFrame, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -61818,6 +62187,9 @@ func (s *Waypoint) Body() (*CelestialBody, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -63016,6 +63388,9 @@ func (s *Waypoint) Contract() (*Contract, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -63080,6 +63455,9 @@ func (s *WaypointManager) AddWaypoint(latitude float64, longitude float64, body 
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -63153,6 +63531,9 @@ func (s *WaypointManager) AddWaypointAtAltitude(latitude float64, longitude floa
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

@@ -24,7 +24,7 @@ type Camera struct {
 // NewCamera creates a new Camera.
 func NewCamera(id uint64, client *krpcgo.KRPCClient) *Camera {
 	c := &Camera{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -64,6 +64,9 @@ func (s *DockingCamera) Camera(part *spacecenter.Part) (*Camera, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -142,6 +145,9 @@ func (s *Camera) Part() (*spacecenter.Part, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil

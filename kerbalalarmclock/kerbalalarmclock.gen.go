@@ -111,7 +111,7 @@ type Alarm struct {
 // NewAlarm creates a new Alarm.
 func NewAlarm(id uint64, client *krpcgo.KRPCClient) *Alarm {
 	c := &Alarm{BaseClass: service.BaseClass{Client: client}}
-	c.SetID(id)
+	c.SetID_internal(id)
 	return c
 }
 
@@ -155,6 +155,9 @@ func (s *KerbalAlarmClock) AlarmWithName(name string) (*Alarm, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -272,6 +275,9 @@ func (s *KerbalAlarmClock) CreateAlarm(t AlarmType, name string, ut float64) (*A
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
@@ -1311,6 +1317,9 @@ func (s *Alarm) Vessel() (*spacecenter.Vessel, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1375,6 +1384,9 @@ func (s *Alarm) XferOriginBody() (*spacecenter.CelestialBody, error) {
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
 	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
+	}
 	vv.Client = s.Client
 	return &vv, nil
 }
@@ -1438,6 +1450,9 @@ func (s *Alarm) XferTargetBody() (*spacecenter.CelestialBody, error) {
 	err = encode.Unmarshal(result.Value, &vv)
 	if err != nil {
 		return &vv, tracerr.Wrap(err)
+	}
+	if vv.ID_internal() == 0 {
+		return nil, nil
 	}
 	vv.Client = s.Client
 	return &vv, nil
