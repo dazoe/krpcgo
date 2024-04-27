@@ -1,4 +1,4 @@
-module github.com/atburke/krpc-go
+module github.com/dazoe/krpcgo
 
 go 1.19
 
